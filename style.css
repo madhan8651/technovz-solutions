@@ -1,0 +1,868 @@
+/*
+Theme Name: TechNovz Solutions
+Theme URI: http://localhost/wordpress
+Author: TechNovz Solutions
+Author URI: http://localhost/wordpress
+Description: Custom child theme for TechNovz Solutions based on the Semplicemente theme.
+Version: 1.0.0
+Template: semplicemente
+Text Domain: technovz-solutions
+*/
+
+
+/* =========================================================
+   BASE
+   ========================================================= */
+
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+}
+
+
+/* =========================================================
+   MAIN WEBSITE CONTAINER
+   ========================================================= */
+
+#page.site {
+    width: calc(100% - 80px) !important;
+    max-width: 1450px !important;
+    margin: 30px auto !important;
+    box-sizing: border-box !important;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+#masthead.site-header {
+    width: 100% !important;
+    margin-bottom: 25px !important;
+    box-sizing: border-box !important;
+}
+
+.site-branding {
+    width: 100% !important;
+}
+
+.site-title {
+    margin: 0 !important;
+}
+
+.site-description {
+    margin: 0 !important;
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+#site-navigation.main-navigation {
+    width: 100% !important;
+    float: none !important;
+    clear: both !important;
+    box-sizing: border-box !important;
+}
+
+#site-navigation.main-navigation ul {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#site-navigation.main-navigation > ul {
+    display: table !important;
+    table-layout: fixed !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+}
+
+#site-navigation.main-navigation > ul > li {
+    display: table-cell !important;
+    float: none !important;
+    width: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+#site-navigation.main-navigation > ul > li > a {
+    display: block !important;
+    width: 100% !important;
+    padding: 1.5em 0.5em !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    box-sizing: border-box !important;
+}
+
+
+/* Active menu item */
+
+#site-navigation.main-navigation > ul > li.current-menu-item > a,
+#site-navigation.main-navigation > ul > li.current_page_item > a {
+    background: rgba(0, 0, 0, 0.03) !important;
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+#content.site-content {
+    width: 100% !important;
+    display: block !important;
+    clear: both !important;
+    box-sizing: border-box !important;
+}
+
+
+/* =========================================================
+   MAIN CONTENT + SIDEBAR
+   ========================================================= */
+
+#primary.content-area {
+    width: 72% !important;
+    float: left !important;
+    padding-right: 25px !important;
+    box-sizing: border-box !important;
+}
+
+#secondary.widget-area {
+    width: 28% !important;
+    float: right !important;
+    box-sizing: border-box !important;
+}
+
+
+/* Clear content floats */
+
+#content.site-content::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+/* =========================================================
+   PAGE CONTENT
+   ========================================================= */
+
+#primary .hentry {
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+#primary .entry-content {
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+#primary .entry-content img {
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+#primary header.entry-header {
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+#secondary {
+    display: block !important;
+}
+
+#secondary .widget {
+    width: 100% !important;
+    background: #FFFFFF !important;
+
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1) !important;
+
+    border-radius: 4px !important;
+
+    padding: 1.5em !important;
+
+    margin-bottom: 25px !important;
+
+    box-sizing: border-box !important;
+}
+
+#secondary .widget-title {
+    color: #404040 !important;
+
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+
+    margin-bottom: 1em !important;
+
+    padding-bottom: 8px !important;
+}
+
+#secondary .widget ul {
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+}
+
+#secondary .widget ul li {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+    padding: 12px 0 !important;
+}
+
+#secondary .widget ul li:last-child {
+    border-bottom: 0 !important;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+#colophon.site-footer {
+
+    background: #F7FAFE !important;
+
+    color: #263B53 !important;
+
+    padding: 50px 30px 0 !important;
+
+    margin: 0 !important;
+
+    border-top: 1px solid #E2EAF3 !important;
+
+    width: 100% !important;
+
+    max-width: none !important;
+
+    position: static !important;
+
+    left: auto !important;
+
+    right: auto !important;
+
+    transform: none !important;
+
+    box-sizing: border-box !important;
+
+    clear: both !important;
+}
+
+
+/* =========================================================
+   FOOTER THREE COLUMNS
+   ========================================================= */
+
+.techNovz-footer {
+
+    width: 100% !important;
+
+    max-width: none !important;
+
+    margin: 0 !important;
+
+    padding: 0 0 45px 0 !important;
+
+    display: grid !important;
+
+    grid-template-columns: 1.35fr 1fr 1.15fr !important;
+
+    gap: 60px !important;
+
+    box-sizing: border-box !important;
+}
+
+.techNovz-footer .footer-column {
+
+    width: auto !important;
+
+    min-width: 0 !important;
+
+    float: none !important;
+
+    box-sizing: border-box !important;
+}
+
+
+/* =========================================================
+   FOOTER HEADINGS
+   ========================================================= */
+
+.techNovz-footer .footer-column h3 {
+
+    color: #172B4D !important;
+
+    font-size: 20px !important;
+
+    font-weight: 700 !important;
+
+    line-height: 1.4 !important;
+
+    margin: 0 0 24px !important;
+
+    padding: 0 !important;
+
+    border: 0 !important;
+
+    background: transparent !important;
+}
+
+.techNovz-footer .footer-column h3::after {
+
+    content: "";
+
+    display: block;
+
+    width: 42px;
+
+    height: 4px;
+
+    background: #2563EB;
+
+    border-radius: 5px;
+
+    margin-top: 10px;
+}
+
+.techNovz-footer .footer-about h3 {
+
+    font-size: 23px !important;
+}
+
+
+/* =========================================================
+   FOOTER ABOUT
+   ========================================================= */
+
+.techNovz-footer .footer-about .footer-tagline {
+
+    color: #174A9C !important;
+
+    font-size: 16px !important;
+
+    font-weight: 600 !important;
+
+    line-height: 1.5 !important;
+
+    margin: 0 0 12px !important;
+}
+
+.techNovz-footer .footer-column p {
+
+    color: #526477 !important;
+
+    font-size: 14px !important;
+
+    line-height: 1.8 !important;
+
+    margin: 0 0 14px !important;
+
+    padding: 0 !important;
+}
+
+
+/* =========================================================
+   FOOTER LINKS
+   ========================================================= */
+
+.techNovz-footer .footer-links ul {
+
+    list-style: none !important;
+
+    margin: 0 !important;
+
+    padding: 0 !important;
+}
+
+.techNovz-footer .footer-links li {
+
+    list-style: none !important;
+
+    margin: 0 0 12px !important;
+
+    padding: 0 !important;
+
+    border: 0 !important;
+}
+
+.techNovz-footer .footer-links a {
+
+    color: #40536A !important;
+
+    text-decoration: none !important;
+
+    font-size: 14px !important;
+
+    font-weight: 500 !important;
+
+    line-height: 1.6 !important;
+
+    display: inline-block !important;
+}
+
+.techNovz-footer .footer-links a::before {
+
+    content: "›";
+
+    color: #2563EB;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    margin-right: 10px;
+
+    vertical-align: -1px;
+}
+
+.techNovz-footer .footer-links a:hover {
+
+    color: #2563EB !important;
+
+    padding-left: 4px !important;
+}
+
+
+/* =========================================================
+   FOOTER CONTACT
+   ========================================================= */
+
+.techNovz-footer .footer-contact p {
+
+    margin-bottom: 18px !important;
+}
+
+.techNovz-footer .footer-contact strong {
+
+    color: #172B4D !important;
+
+    font-weight: 700 !important;
+}
+
+.techNovz-footer .footer-contact a {
+
+    color: #40536A !important;
+
+    text-decoration: none !important;
+
+    font-size: 14px !important;
+}
+
+.techNovz-footer .footer-contact a:hover {
+
+    color: #2563EB !important;
+}
+
+
+/* =========================================================
+   FOOTER BOTTOM
+   ========================================================= */
+
+#colophon.site-footer .footer-bottom {
+
+    width: 100% !important;
+
+    max-width: none !important;
+
+    margin: 0 !important;
+
+    padding: 18px 0 !important;
+
+    background: #263B53 !important;
+
+    border: 0 !important;
+
+    box-sizing: border-box !important;
+
+    display: flex !important;
+
+    justify-content: space-between !important;
+
+    align-items: center !important;
+
+    gap: 20px !important;
+}
+
+#colophon.site-footer .footer-bottom p {
+
+    color: #FFFFFF !important;
+
+    margin: 0 !important;
+
+    padding: 0 !important;
+
+    font-size: 13px !important;
+
+    line-height: 1.5 !important;
+}
+
+#colophon.site-footer .footer-bottom a,
+#colophon.site-footer .footer-bottom a:link,
+#colophon.site-footer .footer-bottom a:visited {
+
+    color: #FFFFFF !important;
+
+    text-decoration: none !important;
+
+    font-size: 13px !important;
+}
+
+#colophon.site-footer .footer-bottom a:hover {
+
+    color: #EAF2FF !important;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media screen and (max-width: 985px) {
+
+    #page.site {
+
+        width: calc(100% - 40px) !important;
+
+        max-width: 100% !important;
+
+        margin: 20px auto !important;
+    }
+
+    #primary.content-area,
+    #secondary.widget-area {
+
+        width: 100% !important;
+
+        float: none !important;
+
+        padding-right: 0 !important;
+    }
+
+    #secondary.widget-area {
+
+        margin-top: 25px !important;
+    }
+
+    #site-navigation.main-navigation > ul {
+
+        display: block !important;
+    }
+
+    #site-navigation.main-navigation > ul > li {
+
+        display: block !important;
+
+        width: 100% !important;
+
+        text-align: left !important;
+    }
+
+    #site-navigation.main-navigation > ul > li > a {
+
+        text-align: left !important;
+
+        padding: 0.8em 1em !important;
+    }
+
+    .techNovz-footer {
+
+        grid-template-columns: 1fr 1fr !important;
+
+        gap: 35px !important;
+    }
+
+    .techNovz-footer .footer-about {
+
+        grid-column: 1 / -1 !important;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media screen and (max-width: 600px) {
+
+    #page.site {
+
+        width: calc(100% - 30px) !important;
+
+        max-width: 100% !important;
+
+        margin: 15px auto !important;
+    }
+
+    #primary.content-area,
+    #secondary.widget-area {
+
+        width: 100% !important;
+
+        float: none !important;
+    }
+
+    #colophon.site-footer {
+
+        padding: 35px 22px 0 !important;
+    }
+
+    .techNovz-footer {
+
+        grid-template-columns: 1fr !important;
+
+        gap: 28px !important;
+
+        padding-bottom: 28px !important;
+    }
+
+    .techNovz-footer .footer-about {
+
+        grid-column: auto !important;
+    }
+
+    .techNovz-footer .footer-column h3 {
+
+        font-size: 18px !important;
+
+        margin-bottom: 14px !important;
+    }
+
+    .techNovz-footer .footer-about h3 {
+
+        font-size: 22px !important;
+    }
+
+    #colophon.site-footer .footer-bottom {
+
+        flex-direction: column !important;
+
+        text-align: center !important;
+
+        gap: 8px !important;
+
+        padding: 18px 0 !important;
+    }
+}
+/* =========================================================
+   TECHNOVZ FINAL LAYOUT OVERRIDES
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   EXPANDED SITE WIDTH
+   --------------------------------------------------------- */
+
+#page.site {
+    width: calc(100% - 80px) !important;
+    max-width: 1450px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+
+/* ---------------------------------------------------------
+   HEADER
+   --------------------------------------------------------- */
+
+#masthead.site-header {
+    width: 100% !important;
+}
+
+#site-navigation.main-navigation {
+    width: 100% !important;
+}
+
+
+/* ---------------------------------------------------------
+   FULL WIDTH MENU
+   --------------------------------------------------------- */
+
+#site-navigation.main-navigation ul#primary-menu {
+    width: 100% !important;
+    display: table !important;
+    table-layout: fixed !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#site-navigation.main-navigation ul#primary-menu > li {
+    display: table-cell !important;
+    float: none !important;
+    width: auto !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+#site-navigation.main-navigation ul#primary-menu > li > a {
+    display: block !important;
+    width: 100% !important;
+    text-align: center !important;
+    padding: 1.5em 0.5em !important;
+    white-space: nowrap !important;
+}
+
+
+/* ---------------------------------------------------------
+   MAIN CONTENT + SIDEBAR
+   --------------------------------------------------------- */
+
+#content.site-content {
+    width: 100% !important;
+}
+
+#primary.content-area {
+    width: 72% !important;
+    float: left !important;
+    padding-right: 25px !important;
+    box-sizing: border-box !important;
+}
+
+#secondary.widget-area {
+    width: 28% !important;
+    float: right !important;
+    box-sizing: border-box !important;
+}
+
+
+/* Clear floats */
+
+#content.site-content::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+/* ---------------------------------------------------------
+   SIDEBAR
+   --------------------------------------------------------- */
+
+#secondary {
+    box-sizing: border-box !important;
+}
+
+#secondary .widget {
+    box-sizing: border-box !important;
+}
+
+
+/* ---------------------------------------------------------
+   FOOTER
+   --------------------------------------------------------- */
+
+#colophon.site-footer {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    clear: both !important;
+}
+
+
+/* Footer columns */
+
+#colophon.site-footer .techNovz-footer {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+
+    display: grid !important;
+    grid-template-columns: 1.35fr 1fr 1.15fr !important;
+    gap: 60px !important;
+}
+
+
+/* Footer bottom */
+
+#colophon.site-footer .footer-bottom {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+}
+
+
+/* ---------------------------------------------------------
+   TABLET
+   --------------------------------------------------------- */
+
+@media screen and (max-width: 985px) {
+
+    #page.site {
+        width: calc(100% - 40px) !important;
+        max-width: 100% !important;
+    }
+
+    #primary.content-area,
+    #secondary.widget-area {
+        width: 100% !important;
+        float: none !important;
+        padding-right: 0 !important;
+    }
+
+    #secondary.widget-area {
+        margin-top: 25px !important;
+    }
+
+    #site-navigation.main-navigation ul#primary-menu {
+        display: block !important;
+    }
+
+    #site-navigation.main-navigation ul#primary-menu > li {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    #site-navigation.main-navigation ul#primary-menu > li > a {
+        text-align: left !important;
+        padding: 0.8em 1em !important;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+   --------------------------------------------------------- */
+
+@media screen and (max-width: 600px) {
+
+    #page.site {
+        width: calc(100% - 30px) !important;
+        max-width: 100% !important;
+    }
+
+    #primary.content-area,
+    #secondary.widget-area {
+        width: 100% !important;
+        float: none !important;
+    }
+
+    #colophon.site-footer .techNovz-footer {
+        grid-template-columns: 1fr !important;
+        gap: 28px !important;
+    }
+
+    #colophon.site-footer .footer-bottom {
+        flex-direction: column !important;
+        text-align: center !important;
+        gap: 8px !important;
+    }
+}
