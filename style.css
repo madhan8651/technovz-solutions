@@ -1,868 +1,1019 @@
-/*
+
+ /*
 Theme Name: TechNovz Solutions
 Theme URI: http://localhost/wordpress
 Author: TechNovz Solutions
 Author URI: http://localhost/wordpress
-Description: Custom child theme for TechNovz Solutions based on the Semplicemente theme.
+Description: Custom child theme based on Semplicemente.
 Version: 1.0.0
 Template: semplicemente
 Text Domain: technovz-solutions
 */
 
-
-/* =========================================================
-   BASE
-   ========================================================= */
+/* =========================================
+   1. GLOBAL STYLES
+========================================= */
 
 html {
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 *,
-*:before,
-*:after {
+*::before,
+*::after {
     box-sizing: inherit;
 }
 
 body {
     margin: 0;
+    color: #475569;
+    background: #f5f8fc;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+}
 
-/* =========================================================
-   MAIN WEBSITE CONTAINER
-   ========================================================= */
+a {
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+/* =========================================
+   2. MAIN SITE LAYOUT
+========================================= */
 
 #page.site {
-    width: calc(100% - 80px) !important;
-    max-width: 1450px !important;
-    margin: 30px auto !important;
-    box-sizing: border-box !important;
+    width: calc(100% - 40px);
+    max-width: 1450px;
+    margin: 20px auto;
+    background: #fff;
 }
 
+#content.site-content {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    clear: both;
+}
 
-/* =========================================================
-   HEADER
-   ========================================================= */
+#content.site-content::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* =========================================
+   3. HEADER
+========================================= */
 
 #masthead.site-header {
-    width: 100% !important;
-    margin-bottom: 25px !important;
-    box-sizing: border-box !important;
+    width: 100%;
+    margin-bottom: 25px;
 }
 
 .site-branding {
-    width: 100% !important;
+    width: 100%;
 }
 
 .site-title {
-    margin: 0 !important;
+    margin: 0;
+    color: #17365d;
+    font-weight: 700;
+}
+
+.site-title a {
+    color: #17365d;
+    text-decoration: none;
 }
 
 .site-description {
-    margin: 0 !important;
+    margin-top: 5px;
+    color: #64748b;
 }
 
-
-/* =========================================================
-   NAVIGATION
-   ========================================================= */
+/* =========================================
+   4. NAVIGATION
+========================================= */
 
 #site-navigation.main-navigation {
-    width: 100% !important;
-    float: none !important;
-    clear: both !important;
-    box-sizing: border-box !important;
+    width: 100%;
+    float: none;
+    clear: both;
 }
 
 #site-navigation.main-navigation ul {
-    width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
-#site-navigation.main-navigation > ul {
-    display: table !important;
-    table-layout: fixed !important;
-    width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    list-style: none !important;
+#site-navigation.main-navigation > ul,
+#site-navigation.main-navigation ul#primary-menu {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    list-style: none;
 }
 
-#site-navigation.main-navigation > ul > li {
-    display: table-cell !important;
-    float: none !important;
-    width: auto !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    text-align: center !important;
-    vertical-align: middle !important;
+#site-navigation.main-navigation > ul > li,
+#site-navigation.main-navigation ul#primary-menu > li {
+    float: none;
+    margin: 0;
+    text-align: center;
 }
 
-#site-navigation.main-navigation > ul > li > a {
-    display: block !important;
-    width: 100% !important;
-    padding: 1.5em 0.5em !important;
-    text-align: center !important;
-    white-space: nowrap !important;
-    box-sizing: border-box !important;
+#site-navigation.main-navigation > ul > li > a,
+#site-navigation.main-navigation ul#primary-menu > li > a {
+    display: block;
+    padding: 14px 18px;
+    color: #263b53;
+    text-decoration: none;
+    white-space: normal;
 }
 
-
-/* Active menu item */
-
-#site-navigation.main-navigation > ul > li.current-menu-item > a,
-#site-navigation.main-navigation > ul > li.current_page_item > a {
-    background: rgba(0, 0, 0, 0.03) !important;
+#site-navigation.main-navigation > ul > li > a:hover,
+#site-navigation.main-navigation ul#primary-menu > li > a:hover,
+#site-navigation.main-navigation > ul > li.current-menu-item > a {
+    color: #2563eb;
+    background: #f0f6ff;
 }
 
-
-/* =========================================================
-   CONTENT
-   ========================================================= */
-
-#content.site-content {
-    width: 100% !important;
-    display: block !important;
-    clear: both !important;
-    box-sizing: border-box !important;
-}
-
-
-/* =========================================================
-   MAIN CONTENT + SIDEBAR
-   ========================================================= */
+/* =========================================
+   5. DEFAULT CONTENT AND SIDEBAR
+========================================= */
 
 #primary.content-area {
-    width: 72% !important;
-    float: left !important;
-    padding-right: 25px !important;
-    box-sizing: border-box !important;
+    width: 72%;
+    float: left;
+    padding-right: 25px;
+    box-sizing: border-box;
 }
 
 #secondary.widget-area {
-    width: 28% !important;
-    float: right !important;
-    box-sizing: border-box !important;
+    width: 28%;
+    float: right;
+    box-sizing: border-box;
 }
 
-
-/* Clear content floats */
-
-#content.site-content::after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-
-/* =========================================================
-   PAGE CONTENT
-   ========================================================= */
-
-#primary .hentry {
-    width: 100% !important;
-    box-sizing: border-box !important;
-}
-
-#primary .entry-content {
-    width: 100% !important;
-    box-sizing: border-box !important;
-}
-
-#primary .entry-content img {
-    max-width: 100% !important;
-    height: auto !important;
-}
-
+#primary .hentry,
+#primary .entry-content,
 #primary header.entry-header {
-    width: 100% !important;
-    box-sizing: border-box !important;
-}
-
-
-/* =========================================================
-   SIDEBAR
-   ========================================================= */
-
-#secondary {
-    display: block !important;
+    box-sizing: border-box;
 }
 
 #secondary .widget {
-    width: 100% !important;
-    background: #FFFFFF !important;
-
-    border: 1px solid rgba(0, 0, 0, 0.1) !important;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.1) !important;
-
-    border-radius: 4px !important;
-
-    padding: 1.5em !important;
-
-    margin-bottom: 25px !important;
-
-    box-sizing: border-box !important;
+    width: 100%;
+    margin-bottom: 25px;
+    padding: 24px;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
 }
 
 #secondary .widget-title {
-    color: #404040 !important;
-
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
-
-    margin-bottom: 1em !important;
-
-    padding-bottom: 8px !important;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    color: #17365d;
+    font-size: 19px;
+    border-bottom: 1px solid #e2e8f0;
 }
 
 #secondary .widget ul {
-    margin: 0 !important;
-    padding: 0 !important;
-    list-style: none !important;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 #secondary .widget ul li {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
-    padding: 12px 0 !important;
+    padding: 12px 0;
+    border-bottom: 1px solid #edf1f7;
 }
 
 #secondary .widget ul li:last-child {
-    border-bottom: 0 !important;
+    border-bottom: 0;
 }
 
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
+/* =========================================
+   6. FOOTER
+========================================= */
 
 #colophon.site-footer {
-
-    background: #F7FAFE !important;
-
-    color: #263B53 !important;
-
-    padding: 50px 30px 0 !important;
-
-    margin: 0 !important;
-
-    border-top: 1px solid #E2EAF3 !important;
-
-    width: 100% !important;
-
-    max-width: none !important;
-
-    position: static !important;
-
-    left: auto !important;
-
-    right: auto !important;
-
-    transform: none !important;
-
-    box-sizing: border-box !important;
-
-    clear: both !important;
-}
-
-
-/* =========================================================
-   FOOTER THREE COLUMNS
-   ========================================================= */
-
-.techNovz-footer {
-
-    width: 100% !important;
-
-    max-width: none !important;
-
-    margin: 0 !important;
-
-    padding: 0 0 45px 0 !important;
-
-    display: grid !important;
-
-    grid-template-columns: 1.35fr 1fr 1.15fr !important;
-
-    gap: 60px !important;
-
-    box-sizing: border-box !important;
-}
-
-.techNovz-footer .footer-column {
-
-    width: auto !important;
-
-    min-width: 0 !important;
-
-    float: none !important;
-
-    box-sizing: border-box !important;
-}
-
-
-/* =========================================================
-   FOOTER HEADINGS
-   ========================================================= */
-
-.techNovz-footer .footer-column h3 {
-
-    color: #172B4D !important;
-
-    font-size: 20px !important;
-
-    font-weight: 700 !important;
-
-    line-height: 1.4 !important;
-
-    margin: 0 0 24px !important;
-
-    padding: 0 !important;
-
-    border: 0 !important;
-
-    background: transparent !important;
-}
-
-.techNovz-footer .footer-column h3::after {
-
-    content: "";
-
-    display: block;
-
-    width: 42px;
-
-    height: 4px;
-
-    background: #2563EB;
-
-    border-radius: 5px;
-
-    margin-top: 10px;
-}
-
-.techNovz-footer .footer-about h3 {
-
-    font-size: 23px !important;
-}
-
-
-/* =========================================================
-   FOOTER ABOUT
-   ========================================================= */
-
-.techNovz-footer .footer-about .footer-tagline {
-
-    color: #174A9C !important;
-
-    font-size: 16px !important;
-
-    font-weight: 600 !important;
-
-    line-height: 1.5 !important;
-
-    margin: 0 0 12px !important;
-}
-
-.techNovz-footer .footer-column p {
-
-    color: #526477 !important;
-
-    font-size: 14px !important;
-
-    line-height: 1.8 !important;
-
-    margin: 0 0 14px !important;
-
-    padding: 0 !important;
-}
-
-
-/* =========================================================
-   FOOTER LINKS
-   ========================================================= */
-
-.techNovz-footer .footer-links ul {
-
-    list-style: none !important;
-
-    margin: 0 !important;
-
-    padding: 0 !important;
-}
-
-.techNovz-footer .footer-links li {
-
-    list-style: none !important;
-
-    margin: 0 0 12px !important;
-
-    padding: 0 !important;
-
-    border: 0 !important;
-}
-
-.techNovz-footer .footer-links a {
-
-    color: #40536A !important;
-
-    text-decoration: none !important;
-
-    font-size: 14px !important;
-
-    font-weight: 500 !important;
-
-    line-height: 1.6 !important;
-
-    display: inline-block !important;
-}
-
-.techNovz-footer .footer-links a::before {
-
-    content: "›";
-
-    color: #2563EB;
-
-    font-size: 20px;
-
-    font-weight: 700;
-
-    margin-right: 10px;
-
-    vertical-align: -1px;
-}
-
-.techNovz-footer .footer-links a:hover {
-
-    color: #2563EB !important;
-
-    padding-left: 4px !important;
-}
-
-
-/* =========================================================
-   FOOTER CONTACT
-   ========================================================= */
-
-.techNovz-footer .footer-contact p {
-
-    margin-bottom: 18px !important;
-}
-
-.techNovz-footer .footer-contact strong {
-
-    color: #172B4D !important;
-
-    font-weight: 700 !important;
-}
-
-.techNovz-footer .footer-contact a {
-
-    color: #40536A !important;
-
-    text-decoration: none !important;
-
-    font-size: 14px !important;
-}
-
-.techNovz-footer .footer-contact a:hover {
-
-    color: #2563EB !important;
-}
-
-
-/* =========================================================
-   FOOTER BOTTOM
-   ========================================================= */
-
-#colophon.site-footer .footer-bottom {
-
-    width: 100% !important;
-
-    max-width: none !important;
-
-    margin: 0 !important;
-
-    padding: 18px 0 !important;
-
-    background: #263B53 !important;
-
-    border: 0 !important;
-
-    box-sizing: border-box !important;
-
-    display: flex !important;
-
-    justify-content: space-between !important;
-
-    align-items: center !important;
-
-    gap: 20px !important;
-}
-
-#colophon.site-footer .footer-bottom p {
-
-    color: #FFFFFF !important;
-
-    margin: 0 !important;
-
-    padding: 0 !important;
-
-    font-size: 13px !important;
-
-    line-height: 1.5 !important;
-}
-
-#colophon.site-footer .footer-bottom a,
-#colophon.site-footer .footer-bottom a:link,
-#colophon.site-footer .footer-bottom a:visited {
-
-    color: #FFFFFF !important;
-
-    text-decoration: none !important;
-
-    font-size: 13px !important;
-}
-
-#colophon.site-footer .footer-bottom a:hover {
-
-    color: #EAF2FF !important;
-}
-
-
-/* =========================================================
-   TABLET
-   ========================================================= */
-
-@media screen and (max-width: 985px) {
-
-    #page.site {
-
-        width: calc(100% - 40px) !important;
-
-        max-width: 100% !important;
-
-        margin: 20px auto !important;
-    }
-
-    #primary.content-area,
-    #secondary.widget-area {
-
-        width: 100% !important;
-
-        float: none !important;
-
-        padding-right: 0 !important;
-    }
-
-    #secondary.widget-area {
-
-        margin-top: 25px !important;
-    }
-
-    #site-navigation.main-navigation > ul {
-
-        display: block !important;
-    }
-
-    #site-navigation.main-navigation > ul > li {
-
-        display: block !important;
-
-        width: 100% !important;
-
-        text-align: left !important;
-    }
-
-    #site-navigation.main-navigation > ul > li > a {
-
-        text-align: left !important;
-
-        padding: 0.8em 1em !important;
-    }
-
-    .techNovz-footer {
-
-        grid-template-columns: 1fr 1fr !important;
-
-        gap: 35px !important;
-    }
-
-    .techNovz-footer .footer-about {
-
-        grid-column: 1 / -1 !important;
-    }
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media screen and (max-width: 600px) {
-
-    #page.site {
-
-        width: calc(100% - 30px) !important;
-
-        max-width: 100% !important;
-
-        margin: 15px auto !important;
-    }
-
-    #primary.content-area,
-    #secondary.widget-area {
-
-        width: 100% !important;
-
-        float: none !important;
-    }
-
-    #colophon.site-footer {
-
-        padding: 35px 22px 0 !important;
-    }
-
-    .techNovz-footer {
-
-        grid-template-columns: 1fr !important;
-
-        gap: 28px !important;
-
-        padding-bottom: 28px !important;
-    }
-
-    .techNovz-footer .footer-about {
-
-        grid-column: auto !important;
-    }
-
-    .techNovz-footer .footer-column h3 {
-
-        font-size: 18px !important;
-
-        margin-bottom: 14px !important;
-    }
-
-    .techNovz-footer .footer-about h3 {
-
-        font-size: 22px !important;
-    }
-
-    #colophon.site-footer .footer-bottom {
-
-        flex-direction: column !important;
-
-        text-align: center !important;
-
-        gap: 8px !important;
-
-        padding: 18px 0 !important;
-    }
-}
-/* =========================================================
-   TECHNOVZ FINAL LAYOUT OVERRIDES
-   ========================================================= */
-
-
-/* ---------------------------------------------------------
-   EXPANDED SITE WIDTH
-   --------------------------------------------------------- */
-
-#page.site {
-    width: calc(100% - 80px) !important;
-    max-width: 1450px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-}
-
-
-/* ---------------------------------------------------------
-   HEADER
-   --------------------------------------------------------- */
-
-#masthead.site-header {
-    width: 100% !important;
-}
-
-#site-navigation.main-navigation {
-    width: 100% !important;
-}
-
-
-/* ---------------------------------------------------------
-   FULL WIDTH MENU
-   --------------------------------------------------------- */
-
-#site-navigation.main-navigation ul#primary-menu {
-    width: 100% !important;
-    display: table !important;
-    table-layout: fixed !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-#site-navigation.main-navigation ul#primary-menu > li {
-    display: table-cell !important;
-    float: none !important;
-    width: auto !important;
-    text-align: center !important;
-    vertical-align: middle !important;
-}
-
-#site-navigation.main-navigation ul#primary-menu > li > a {
-    display: block !important;
-    width: 100% !important;
-    text-align: center !important;
-    padding: 1.5em 0.5em !important;
-    white-space: nowrap !important;
-}
-
-
-/* ---------------------------------------------------------
-   MAIN CONTENT + SIDEBAR
-   --------------------------------------------------------- */
-
-#content.site-content {
-    width: 100% !important;
-}
-
-#primary.content-area {
-    width: 72% !important;
-    float: left !important;
-    padding-right: 25px !important;
-    box-sizing: border-box !important;
-}
-
-#secondary.widget-area {
-    width: 28% !important;
-    float: right !important;
-    box-sizing: border-box !important;
-}
-
-
-/* Clear floats */
-
-#content.site-content::after {
-    content: "";
-    display: table;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 45px 30px 0;
+    color: #263b53;
+    background: #f7fafe;
+    border-top: 1px solid #e2eaf3;
     clear: both;
 }
 
-
-/* ---------------------------------------------------------
-   SIDEBAR
-   --------------------------------------------------------- */
-
-#secondary {
-    box-sizing: border-box !important;
-}
-
-#secondary .widget {
-    box-sizing: border-box !important;
-}
-
-
-/* ---------------------------------------------------------
-   FOOTER
-   --------------------------------------------------------- */
-
-#colophon.site-footer {
-    width: 100% !important;
-    max-width: none !important;
-    margin: 0 !important;
-    box-sizing: border-box !important;
-    clear: both !important;
-}
-
-
-/* Footer columns */
-
+.techNovz-footer,
 #colophon.site-footer .techNovz-footer {
-    width: 100% !important;
-    max-width: none !important;
-    margin: 0 !important;
-    box-sizing: border-box !important;
-
-    display: grid !important;
-    grid-template-columns: 1.35fr 1fr 1.15fr !important;
-    gap: 60px !important;
+    display: grid;
+    grid-template-columns: 1.35fr 1fr 1.15fr;
+    gap: 40px;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0 0 35px;
 }
 
+.techNovz-footer .footer-column {
+    min-width: 0;
+}
 
-/* Footer bottom */
+.techNovz-footer .footer-column h3 {
+    margin: 0 0 20px;
+    padding: 0;
+    color: #172b4d;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.4;
+    border: 0;
+    background: transparent;
+}
+
+.techNovz-footer .footer-column h3::after {
+    content: "";
+    display: block;
+    width: 42px;
+    height: 4px;
+    margin-top: 10px;
+    background: #2563eb;
+    border-radius: 5px;
+}
+
+.techNovz-footer .footer-about h3 {
+    font-size: 23px;
+}
+
+.techNovz-footer .footer-about .footer-tagline {
+    margin-bottom: 12px;
+    color: #174a9c;
+    font-weight: 600;
+}
+
+.techNovz-footer .footer-column p {
+    margin: 0 0 14px;
+    color: #526477;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.techNovz-footer .footer-links ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.techNovz-footer .footer-links li {
+    margin: 0 0 12px;
+    padding: 0;
+    list-style: none;
+    border: 0;
+}
+
+.techNovz-footer .footer-links a {
+    color: #40536a;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.techNovz-footer .footer-links a::before {
+    content: "›";
+    margin-right: 10px;
+    color: #2563eb;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.techNovz-footer .footer-links a:hover,
+.techNovz-footer .footer-contact a:hover {
+    color: #2563eb;
+}
+
+.techNovz-footer .footer-contact strong {
+    color: #172b4d;
+}
+
+.techNovz-footer .footer-contact a {
+    color: #40536a;
+    font-size: 14px;
+    text-decoration: none;
+}
 
 #colophon.site-footer .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    margin: 0;
+    padding: 18px 0;
+    background: #263b53;
+}
+
+#colophon.site-footer .footer-bottom p {
+    margin: 0;
+    color: #fff;
+    font-size: 13px;
+}
+
+#colophon.site-footer .footer-bottom a,
+#colophon.site-footer .footer-bottom a:visited {
+    color: #fff;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+/* =========================================
+   7. PROJECT PAGE - OUTER CONTAINER
+========================================= */
+
+body.single-pmt_project #content.site-content {
     width: 100% !important;
-    max-width: none !important;
-    margin: 0 !important;
+    max-width: 100% !important;
+}
+
+body.single-pmt_project #primary.content-area {
+    display: block !important;
+    float: none !important;
+    width: 100% !important;
+    max-width: 1140px !important;
+    margin: 35px auto !important;
+    padding: 0 20px !important;
     box-sizing: border-box !important;
 }
 
+body.single-pmt_project .site-main {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
 
-/* ---------------------------------------------------------
-   TABLET
-   --------------------------------------------------------- */
+body.single-pmt_project article.pmt_project {
+    display: block !important;
+    float: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto 35px !important;
+    padding: 0 !important;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    box-shadow: 0 12px 35px rgba(24, 55, 95, 0.07);
+    box-sizing: border-box !important;
+}
+
+/* =========================================
+   8. PROJECT TITLE
+========================================= */
+
+body.single-pmt_project .entry-header {
+    width: 100%;
+    margin: 0;
+    padding: 36px 42px 26px;
+    background: linear-gradient(135deg, #fff, #f0f6ff);
+    border-bottom: 1px solid #e8eef7;
+    box-sizing: border-box;
+}
+
+body.single-pmt_project .entry-title {
+    margin: 0 0 16px;
+    color: #17365d;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: -0.7px;
+}
+
+/* =========================================
+   9. CENTERED PROJECT IMAGE
+========================================= */
+
+body.single-pmt_project .post-thumbnail {
+    display: block !important;
+    float: none !important;
+    width: calc(100% - 84px) !important;
+    max-width: 900px !important;
+    margin: 28px auto !important;
+    padding: 0 !important;
+    text-align: center;
+    box-sizing: border-box !important;
+}
+
+body.single-pmt_project .post-thumbnail img,
+body.single-pmt_project .entry-content img {
+    display: block;
+    float: none;
+    max-width: 100%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body.single-pmt_project .post-thumbnail img {
+    max-height: 500px;
+    object-fit: contain;
+    object-position: center;
+    background: #f5f8fc;
+    border-radius: 12px;
+}
+
+/* =========================================
+   10. PROJECT DESCRIPTION
+========================================= */
+
+/*
+   The description and details card share the
+   same centered 900px maximum width.
+*/
+
+body.single-pmt_project article.pmt_project .entry-content {
+    display: block !important;
+    float: none !important;
+    width: calc(100% - 84px) !important;
+    max-width: 900px !important;
+    margin: 0 auto !important;
+    padding: 24px 0 !important;
+    color: #475569;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.85;
+    letter-spacing: 0.1px;
+    text-align: left;
+    overflow-wrap: break-word;
+    box-sizing: border-box !important;
+}
+
+body.single-pmt_project article.pmt_project .entry-content p {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 0 24px;
+    padding: 0;
+    color: #475569;
+    font-size: 17px;
+    line-height: 1.85;
+    text-align: left;
+    overflow-wrap: break-word;
+    box-sizing: border-box;
+}
+
+body.single-pmt_project .entry-content h2 {
+    position: relative;
+    margin: 32px 0 18px;
+    padding-bottom: 12px;
+    color: #17365d;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.4;
+    border-bottom: 1px solid #e2eaf5;
+}
+
+body.single-pmt_project .entry-content h2::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: #2563eb;
+    border-radius: 3px;
+}
+
+body.single-pmt_project .entry-content h3 {
+    margin: 26px 0 14px;
+    padding-bottom: 8px;
+    color: #234b7b;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.5;
+    border-bottom: 1px solid #dbe5f1;
+}
+
+body.single-pmt_project .entry-content h4,
+body.single-pmt_project .entry-content h5,
+body.single-pmt_project .entry-content h6 {
+    margin: 22px 0 12px;
+    color: #234b7b;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+body.single-pmt_project .entry-content strong,
+body.single-pmt_project .entry-content b {
+    color: #243b59;
+    font-weight: 700;
+}
+
+body.single-pmt_project .entry-content ul,
+body.single-pmt_project .entry-content ol {
+    margin: 18px 0 26px;
+    padding-left: 28px;
+}
+
+body.single-pmt_project .entry-content li {
+    margin-bottom: 10px;
+    padding-left: 4px;
+    font-size: 16px;
+    line-height: 1.85;
+}
+
+body.single-pmt_project .entry-content li::marker {
+    color: #2563eb;
+}
+
+body.single-pmt_project .entry-content a {
+    color: #2563eb;
+    text-decoration: underline;
+    text-decoration-color: #93b4ff;
+    text-underline-offset: 4px;
+    overflow-wrap: anywhere;
+}
+
+body.single-pmt_project .entry-content a:hover {
+    color: #17365d;
+}
+
+body.single-pmt_project .entry-content blockquote {
+    margin: 25px 0;
+    padding: 20px 24px;
+    background: #f3f7ff;
+    border-left: 4px solid #2563eb;
+    border-radius: 0 10px 10px 0;
+}
+
+body.single-pmt_project .entry-content hr {
+    margin: 30px 0;
+    border: 0;
+    border-top: 1px solid #dbe5f1;
+}
+
+body.single-pmt_project .entry-content table {
+    width: 100%;
+    margin: 24px 0;
+    border-collapse: collapse;
+    font-size: 15px;
+}
+
+body.single-pmt_project .entry-content th,
+body.single-pmt_project .entry-content td {
+    padding: 12px 15px;
+    border: 1px solid #dbe5f1;
+    text-align: left;
+}
+
+body.single-pmt_project .entry-content th {
+    color: #17365d;
+    background: #edf4ff;
+}
+
+/* =========================================
+   11. PROJECT DETAILS CARD
+========================================= */
+
+body.single-pmt_project .project-details {
+    display: block !important;
+    float: none !important;
+    width: calc(100% - 84px) !important;
+    max-width: 900px !important;
+    margin: 28px auto 32px !important;
+    padding: 28px 32px !important;
+    color: #526174;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-top: 4px solid #2563eb;
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(23, 54, 93, 0.08);
+    font-family: "Segoe UI", Arial, sans-serif;
+    box-sizing: border-box !important;
+}
+
+/* Card heading */
+
+body.single-pmt_project .project-details h2 {
+    display: block;
+    position: relative;
+    width: auto;
+    margin: 0 0 18px;
+    padding: 0 0 16px;
+    color: #17365d;
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 1.4;
+    border: 0;
+}
+
+body.single-pmt_project .project-details h2::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 52px;
+    height: 4px;
+    background: #2563eb;
+    border-radius: 5px;
+}
+
+/* Detail rows */
+
+body.single-pmt_project .project-details p {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 13px 0;
+    color: #526174;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid #edf1f7;
+    border-radius: 0;
+    font-size: 15.5px;
+    font-weight: 400;
+    line-height: 1.7;
+    letter-spacing: 0.1px;
+    overflow-wrap: anywhere;
+    box-sizing: border-box;
+}
+
+body.single-pmt_project .project-details p:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+}
+
+body.single-pmt_project .project-details p strong {
+    color: #243b59;
+    font-weight: 700;
+}
+
+body.single-pmt_project .project-details p a {
+    color: #2563eb;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+body.single-pmt_project .project-details p a:hover {
+    color: #1745a5;
+    text-decoration: underline;
+}
+
+/* =========================================
+   12. PROJECT NAVIGATION
+========================================= */
+
+body.single-pmt_project .post-navigation {
+    margin: 28px 0;
+    padding: 22px 28px;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    box-shadow: 0 6px 20px rgba(24, 55, 95, 0.05);
+}
+
+body.single-pmt_project .post-navigation .nav-links {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+body.single-pmt_project .post-navigation a {
+    color: #2455a4;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+body.single-pmt_project .post-navigation a:hover {
+    color: #17365d;
+}
+
+/* Hide the duplicate category/footer below the card.
+   Remove this rule if you need the article footer. */
+
+body.single-pmt_project article.pmt_project > .entry-footer {
+    display: none !important;
+}
+
+/* =========================================
+   13. TABLET
+========================================= */
 
 @media screen and (max-width: 985px) {
-
     #page.site {
-        width: calc(100% - 40px) !important;
-        max-width: 100% !important;
+        width: calc(100% - 30px);
+        margin: 15px auto;
     }
 
     #primary.content-area,
     #secondary.widget-area {
-        width: 100% !important;
-        float: none !important;
-        padding-right: 0 !important;
+        width: 100%;
+        float: none;
+        padding-right: 0;
     }
 
     #secondary.widget-area {
-        margin-top: 25px !important;
+        margin-top: 25px;
     }
 
-    #site-navigation.main-navigation ul#primary-menu {
-        display: block !important;
+    .techNovz-footer,
+    #colophon.site-footer .techNovz-footer {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
     }
 
-    #site-navigation.main-navigation ul#primary-menu > li {
-        display: block !important;
-        width: 100% !important;
-    }
-
-    #site-navigation.main-navigation ul#primary-menu > li > a {
-        text-align: left !important;
-        padding: 0.8em 1em !important;
+    .techNovz-footer .footer-about {
+        grid-column: 1 / -1;
     }
 }
 
+/* =========================================
+   14. PROJECT MOBILE RESPONSIVENESS
+========================================= */
 
-/* ---------------------------------------------------------
-   MOBILE
-   --------------------------------------------------------- */
+@media screen and (max-width: 768px) {
+    body.single-pmt_project #primary.content-area {
+        margin: 20px auto !important;
+        padding: 0 12px !important;
+    }
+
+    body.single-pmt_project article.pmt_project .entry-header {
+        padding: 26px 22px;
+    }
+
+    body.single-pmt_project .entry-title {
+        font-size: 30px;
+        letter-spacing: -0.4px;
+    }
+
+    body.single-pmt_project .post-thumbnail,
+    body.single-pmt_project article.pmt_project .entry-content,
+    body.single-pmt_project .project-details {
+        width: calc(100% - 36px) !important;
+        max-width: 900px !important;
+    }
+
+    body.single-pmt_project .post-thumbnail {
+        margin-top: 20px !important;
+    }
+
+    body.single-pmt_project article.pmt_project .entry-content {
+        padding: 18px 0 !important;
+        font-size: 16px;
+        line-height: 1.8;
+    }
+
+    body.single-pmt_project article.pmt_project .entry-content p {
+        font-size: 16px;
+        line-height: 1.8;
+    }
+
+    body.single-pmt_project .entry-content h2 {
+        font-size: 24px;
+    }
+
+    body.single-pmt_project .entry-content h3 {
+        font-size: 20px;
+    }
+
+    body.single-pmt_project .project-details {
+        margin: 22px auto 24px !important;
+        padding: 20px !important;
+        border-radius: 12px;
+    }
+
+    body.single-pmt_project .project-details h2 {
+        font-size: 22px;
+    }
+
+    body.single-pmt_project .project-details p {
+        padding: 11px 0;
+        font-size: 14.5px;
+        line-height: 1.75;
+    }
+
+    body.single-pmt_project .entry-content table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    body.single-pmt_project .post-navigation {
+        padding: 18px;
+    }
+
+    body.single-pmt_project .post-navigation .nav-links {
+        flex-direction: column;
+    }
+}
+
+/* =========================================
+   15. SMALL MOBILE
+========================================= */
 
 @media screen and (max-width: 600px) {
-
     #page.site {
-        width: calc(100% - 30px) !important;
-        max-width: 100% !important;
+        width: calc(100% - 20px);
+        margin: 10px auto;
     }
 
-    #primary.content-area,
-    #secondary.widget-area {
-        width: 100% !important;
-        float: none !important;
+    #site-navigation.main-navigation > ul,
+    #site-navigation.main-navigation ul#primary-menu {
+        display: block;
     }
 
+    #site-navigation.main-navigation > ul > li,
+    #site-navigation.main-navigation ul#primary-menu > li {
+        display: block;
+        width: 100%;
+        text-align: left;
+    }
+
+    #site-navigation.main-navigation > ul > li > a,
+    #site-navigation.main-navigation ul#primary-menu > li > a {
+        padding: 12px 16px;
+        text-align: left;
+    }
+
+    #colophon.site-footer {
+        padding: 30px 20px 0;
+    }
+
+    .techNovz-footer,
     #colophon.site-footer .techNovz-footer {
-        grid-template-columns: 1fr !important;
-        gap: 28px !important;
+        grid-template-columns: 1fr;
+        gap: 25px;
+        padding-bottom: 25px;
+    }
+
+    .techNovz-footer .footer-about {
+        grid-column: auto;
     }
 
     #colophon.site-footer .footer-bottom {
-        flex-direction: column !important;
-        text-align: center !important;
-        gap: 8px !important;
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
     }
+
+    body.single-pmt_project #primary.content-area {
+        padding: 0 8px !important;
+    }
+
+    body.single-pmt_project article.pmt_project .entry-header {
+        padding: 22px 18px;
+    }
+
+    body.single-pmt_project .entry-title {
+        font-size: 26px;
+    }
+
+    body.single-pmt_project .post-thumbnail,
+    body.single-pmt_project article.pmt_project .entry-content,
+    body.single-pmt_project .project-details {
+        width: calc(100% - 20px) !important;
+    }
+
+    body.single-pmt_project .project-details {
+        padding: 18px !important;
+    }
+
+    body.single-pmt_project .project-details h2 {
+        font-size: 21px;
+    }
+
+    body.single-pmt_project .project-details p {
+        font-size: 14px;
+    }
+}
+/* ========================================
+   TechNovz Solutions - Custom 404 Page
+======================================== */
+
+.techNovz-404 {
+    max-width: 900px;
+    margin: 70px auto;
+    padding: 60px 30px;
+    text-align: center;
+    background: #f8fafc;
+    border-radius: 16px;
+    box-sizing: border-box;
+}
+
+.techNovz-404 .page-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.techNovz-404 .page-title {
+    margin: 0 0 20px;
+    color: #172033;
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.techNovz-404 .error-message {
+    margin-bottom: 24px;
+    color: #64748b;
+    font-size: 17px;
+    line-height: 1.8;
+}
+
+.techNovz-404 h2 {
+    margin: 28px 0 12px;
+    color: #263449;
+    font-size: 25px;
+    line-height: 1.4;
+}
+
+.techNovz-404 p {
+    color: #64748b;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.techNovz-404 .error-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 30px;
+}
+
+.techNovz-404 .error-button {
+    display: inline-block;
+    padding: 13px 24px;
+    border: 2px solid #263449;
+    border-radius: 8px;
+    background: #263449;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.5;
+    text-decoration: none;
+    transition: background-color 0.2s ease,
+                color 0.2s ease,
+                border-color 0.2s ease;
+}
+
+.techNovz-404 .error-button:hover,
+.techNovz-404 .error-button:focus {
+    border-color: #0f172a;
+    background: #0f172a;
+    color: #ffffff;
+}
+
+.techNovz-404 .secondary-button {
+    border-color: #cbd5e1;
+    background: transparent;
+    color: #263449;
+}
+
+.techNovz-404 .secondary-button:hover,
+.techNovz-404 .secondary-button:focus {
+    border-color: #263449;
+    background: #263449;
+    color: #ffffff;
+}
+
+@media (max-width: 600px) {
+    .techNovz-404 {
+        margin: 30px 15px;
+        padding: 40px 20px;
+    }
+
+    .techNovz-404 .error-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .techNovz-404 .error-button {
+        text-align: center;
+    }
+}
+/* Center the card only on the 404 page */
+body.error404 #main.site-main {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+body.error404 .techNovz-404 {
+    width: calc(100% - 30px);
+    max-width: 900px;
+    margin: 70px auto;
+    box-sizing: border-box;
+}
+
+body.error404 .techNovz-404 .page-content {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
 }
