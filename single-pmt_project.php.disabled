@@ -1,0 +1,158 @@
+<?php
+/**
+ * Single Project Template
+ *
+ * Displays an individual project and its custom details.
+ *
+ * @package TechNovzSolutions
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
+get_header();
+
+while ( have_posts() ) :
+    the_post();
+
+    $project_id = get_the_ID();
+
+    $project_url = get_post_meta(
+        $project_id,
+        '_pmt_project_url',
+        true
+    );
+
+    $completion_date = get_post_meta(
+        $project_id,
+        '_pmt_completion_date',
+        true
+    );
+
+    $project_status = get_post_meta(
+        $project_id,
+        '_pmt_project_status',
+        true
+    );
+
+    $status_labels = array(
+        'planned'     => __( 'Planned', 'technovz-solutions' ),
+        'in_progress' => __( 'In Progress', 'technovz-solutions' ),
+        'completed'   => __( 'Completed', 'technovz-solutions' ),
+    );
+
+    $status_label = isset( $status_labels[ $project_status ] )
+        ? $status_labels[ $project_status ]
+        : __( 'Not specified', 'technovz-solutions' );
+
+    $categories = get_the_terms( $project_id, 'pmt_project_category' );
+    $technologies = get_the_terms( $project_id, 'pmt_project_technology' );
+    ?>
+
+    <main id="primary" class="site-main project-detail-page">
+        <article id="post-<?php the_ID(); ?>" <?php post_class( 'project-detail' ); ?>>
+
+            <header class="project-detail-header">
+                <h1 class="project-detail-title">
+                    <?php the_title(); ?>
+                </h1>
+
+                <?php if ( has_post_thumbnail() ) : ?>
+                    <div class="project-detail-image">
+                        <?php
+                        the_post_thumbnail(
+                            'large',
+                            array(
+                                'class' => 'project-featured-image',
+                            )
+                        );
+                        ?>
+                    </div>
+                <?php endif; ?>
+            </header>
+
+            <div class="project-detail-content">
+                <?php the_content(); ?>
+            </div>
+
+            <section class="project-detail-information">
+                <h2><?php esc_html_e( 'Project Information', 'technovz-solutions' ); ?></h2>
+
+                <dl class="project-information-list">
+
+                    <dt><?php esc_html_e( 'Category', 'technovz-solutions' ); ?></dt>
+                    <dd>
+                        <?php
+                        if ( ! is_wp_error( $categories ) && ! empty( $categories ) ) {
+                            echo esc_html(
+                                implode(
+                                    ', ',
+                                    wp_list_pluck( $categories, 'name' )
+                                )
+                            );
+                        } else {
+                            esc_html_e( 'Not assigned', 'technovz-solutions' );
+                        }
+                        ?>
+                    </dd>
+
+                    <dt><?php esc_html_e( 'Technologies', 'technovz-solutions' ); ?></dt>
+                    <dd>
+                        <?php
+                        if ( ! is_wp_error( $technologies ) && ! empty( $technologies ) ) {
+                            echo esc_html(
+                                implode(
+                                    ', ',
+                                    wp_list_pluck( $technologies, 'name' )
+                                )
+                            );
+                        } else {
+                            esc_html_e( 'Not assigned', 'technovz-solutions' );
+                        }
+                        ?>
+                    </dd>
+
+                    <dt><?php esc_html_e( 'Status', 'technovz-solutions' ); ?></dt>
+                    <dd><?php echo esc_html( $status_label ); ?></dd>
+
+                    <dt><?php esc_html_e( 'Completion Date', 'technovz-solutions' ); ?></dt>
+                    <dd>
+                        <?php
+                        if ( ! empty( $completion_date ) ) {
+                            $timestamp = strtotime( $completion_date );
+
+                            echo esc_html(
+                                $timestamp
+                                    ? wp_date( get_option( 'date_format' ), $timestamp )
+                                    : $completion_date
+                            );
+                        } else {
+                            esc_html_e( 'Not specified', 'technovz-solutions' );
+                        }
+                        ?>
+                    </dd>
+
+                </dl>
+
+                <?php if ( ! empty( $project_url ) ) : ?>
+                    <p class="project-live-link">
+                        <a
+                            href="<?php echo esc_url( $project_url ); ?>"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <?php esc_html_e( 'Visit Project', 'technovz-solutions' ); ?>
+                            &rarr;
+                        </a>
+                    </p>
+                <?php endif; ?>
+            </section>
+
+        </article>
+    </main>
+
+    <?php
+endwhile;
+
+get_footer();
