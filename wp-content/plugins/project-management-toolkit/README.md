@@ -1,225 +1,64 @@
 # Project Management Toolkit
 
-A WordPress plugin for managing projects, organizing project categories and technologies, displaying project listings with React, and tracking project views. It includes a public REST API, AJAX-powered pagination, administrative settings, and dashboard integration.
+A WordPress plugin for managing projects, project details, categories, technologies, and project-related data through the WordPress admin dashboard and REST API.
 
 ## Features
 
-- **Project Management:** Create and manage projects using a custom post type.
-- **Project Categories:** Organize projects by category.
-- **Project Technologies:** Classify projects by the technologies they use.
-- **React Project Listing:** Display projects through the `[pmt_react_projects]` shortcode.
-- **REST API:** Retrieve published projects through a paginated JSON endpoint.
-- **AJAX Load More:** Load additional projects without refreshing the page.
-- **Project View Tracking:** Record views of published project pages in a custom database table.
-- **View Count Caching:** Cache aggregated project view counts using the WordPress Transients API.
-- **Admin Settings:** Configure a dashboard message and enable or disable its display.
-- **Dashboard Widget:** Display the configured message on the WordPress dashboard.
-- **Security:** Includes input validation, sanitization, output escaping, nonce verification, and capability checks in reviewed components.
+- **Project Management:** Create, edit, and manage project entries in WordPress.
+- **Custom Post Type:** Registers a dedicated post type for projects.
+- **Project Categories:** Organize projects into categories.
+- **Project Technologies:** Associate technologies with projects.
+- **Custom Project Fields:** Store additional project information.
+- **REST API:** Provides endpoints for retrieving and managing project data.
+- **Shortcode Support:** Display project information using WordPress shortcodes.
+- **Admin Settings:** Configure plugin-related settings from the WordPress dashboard.
+- **Database Support:** Includes project view and database-related functionality.
+- **Activation and Deactivation:** Handles plugin activation and deactivation routines.
+- **Uninstall Support:** Includes an uninstall handler.
 
 ## Requirements
 
 - WordPress
-- PHP version compatible with your WordPress installation and the plugin dependencies
-- MySQL or MariaDB
-- A WordPress theme
-- JavaScript support for the React-powered project listing
+- PHP version compatible with your WordPress installation
+- A MySQL or MariaDB database supported by WordPress
 
 ## Installation
 
-### Local installation using XAMPP
+### Method 1: Install Manually
 
-1. Copy or clone the plugin into:
+1. Copy the `project-management-toolkit` folder into:
 
-   `wp-content/plugins/project-management-toolkit/`
+   ```text
+   wp-content/plugins/
+   ```
 
-2. Open your WordPress administration dashboard.
-3. Navigate to **Plugins → Installed Plugins**.
-4. Find **Project Management Toolkit** and click **Activate**.
-5. Add projects through the plugin's project management interface.
-6. Configure the dashboard message under **Settings → Project Management Toolkit**.
+2. Confirm that the main plugin file exists:
 
-The plugin activation routine creates the custom project views database table.
+   ```text
+   wp-content/plugins/project-management-toolkit/project-management-toolkit.php
+   ```
 
-## Usage
+3. Log in to the WordPress admin dashboard.
+4. Navigate to **Plugins → Installed Plugins**.
+5. Find **Project Management Toolkit**.
+6. Click **Activate**.
 
-### React project listing
+### Method 2: Using the Combined Repository
 
-Add the following shortcode to a WordPress page:
-
-```text
-[pmt_react_projects]
-```
-
-The listing initially retrieves two projects from the REST API. Visitors can use the **Load More Projects** button to retrieve subsequent projects through WordPress AJAX.
-
-### Project categories and technologies
-
-Use the registered project categories and technology taxonomies to organize projects and make their information easier to manage.
-
-### Dashboard message
-
-Navigate to:
-
-**WordPress Admin → Settings → Project Management Toolkit**
-
-You can configure the dashboard message and enable or disable its display.
-
-## REST API
-
-### Endpoint
-
-```http
-GET /wp-json/pmt/v1/projects
-```
-
-For a local XAMPP installation, the endpoint may be:
+If you are using the Technovz Solutions combined repository, the plugin is located at:
 
 ```text
-http://localhost/wordpress/wp-json/pmt/v1/projects
+wp-content/plugins/project-management-toolkit/
 ```
 
-The endpoint returns published projects and supports pagination.
-
-### Query parameters
-
-| Parameter | Default | Allowed values |
-|---|---:|---|
-| `page` | `1` | Positive integer |
-| `per_page` | `10` | Integer from 1 to 50 |
-
-### Example requests
-
-Retrieve projects using the default settings:
-
-```http
-GET /wp-json/pmt/v1/projects
-```
-
-Retrieve the first two projects:
-
-```http
-GET /wp-json/pmt/v1/projects?page=1&per_page=2
-```
-
-Retrieve the second page:
-
-```http
-GET /wp-json/pmt/v1/projects?page=2&per_page=2
-```
-
-### Example response
-
-```json
-{
-  "success": true,
-  "data": [
-    {
-      "id": 408,
-      "title": "E-Commerce Platform",
-      "description": "A user-friendly online store.",
-      "category": ["Web Development"],
-      "image_url": "http://localhost/wordpress/wp-content/uploads/example.png",
-      "project_url": "http://localhost/wordpress/projects/e-commerce-platform/"
-    }
-  ],
-  "pagination": {
-    "current_page": 1,
-    "per_page": 2,
-    "total_items": 4,
-    "total_pages": 2
-  }
-}
-```
-
-The example response is illustrative. Actual project data, URLs, and pagination values depend on the installed WordPress site.
-
-### Error handling
-
-Invalid pagination values return a WordPress REST API error response. Examples include:
-
-- `page=0`
-- `page=abc`
-- `per_page=100`
-
-Check the HTTP status code as well as the JSON response when testing.
-
-## AJAX Pagination
-
-The React listing uses the WordPress AJAX action:
-
-```text
-pmt_load_more_projects
-```
-
-The AJAX handler:
-
-- Verifies the request nonce.
-- Validates the requested page.
-- Retrieves published projects only.
-- Returns project data and pagination information.
-- Rejects invalid or unavailable page requests.
-
-The AJAX handler supports both logged-in and public visitors because the project listing is intended to be public.
-
-## Project View Tracking
-
-The plugin records views of published project pages in the database table:
-
-```text
-wp_pmt_project_views
-```
-
-The table contains:
-
-| Column | Purpose |
-|---|---|
-| `id` | Unique view record |
-| `project_id` | ID of the viewed project |
-| `viewed_at` | Date and time of the view |
-
-The table name uses the WordPress database prefix, so it may differ from `wp_` on another installation.
-
-Aggregated view counts can be cached using the WordPress Transients API. The cache is invalidated when a new view record is successfully inserted.
-
-## Security Measures
-
-The reviewed plugin components include measures such as:
-
-- Sanitizing and validating incoming settings and request parameters.
-- Escaping displayed text and URLs.
-- Verifying nonces for protected AJAX and metadata operations.
-- Checking user capabilities for administrative settings.
-- Using `$wpdb->prepare()` for SQL queries with dynamic values.
-- Using WordPress database APIs for inserts.
-- Restricting project listing queries to published projects.
-- Validating project metadata, including URLs, dates, and allowed status values.
-
-Security should be assessed across the complete plugin and deployment environment. The measures above describe the reviewed components and do not constitute a full security audit.
-
-## Testing
-
-The following REST API scenarios were tested during development:
-
-| Test | Expected result |
-|---|---|
-| Default API request | Returns published projects |
-| `page=1&per_page=2` | Returns the first page |
-| `page=2&per_page=2` | Returns the next page |
-| `page=0` | Rejects invalid pagination |
-| `page=abc` | Rejects invalid pagination |
-| `per_page=100` | Rejects values above the limit |
-
-The AJAX listing was also tested to confirm that additional projects could be loaded through the browser's Network panel.
+Place the repository's `wp-content` directory into the corresponding location in your WordPress installation, or copy the plugin folder into the existing `wp-content/plugins/` directory.
 
 ## Project Structure
 
 ```text
 project-management-toolkit/
 ├── assets/
-│   ├── css/
-│   │   └── react-projects.css
-│   └── js/
-│       └── react-projects.js
+│   └── (non-React plugin assets, if required)
 ├── docs/
 │   └── rest-api-documentation.md
 ├── includes/
@@ -230,22 +69,172 @@ project-management-toolkit/
 │   │   └── Settings.php
 │   ├── Database/
 │   │   └── ProjectViews.php
-│   ├── Frontend/
-│   │   └── ReactProjects.php
-│   └── Rest/
-│       └── ProjectRestController.php
+│   ├── PostTypes/
+│   │   ├── ProjectFields.php
+│   │   └── ProjectPostType.php
+│   ├── Rest/
+│   │   └── ProjectRestController.php
+│   ├── Shortcodes/
+│   │   └── ProjectShortcode.php
+│   ├── Taxonomies/
+│   │   ├── ProjectCategory.php
+│   │   └── ProjectTechnology.php
+│   └── Plugin.php
+├── .gitignore
 ├── project-management-toolkit.php
-└── README.md
+├── README.md
+└── uninstall.php
 ```
 
-This is a partial overview of the reviewed files. Other source files may be present in the installed plugin.
+The `assets/` directory is reserved for any non-React assets the plugin still needs. The React frontend files have been removed.
+
+## Main Components
+
+### 1. Main Plugin File
+
+**File:** `project-management-toolkit.php`
+
+The main entry point for the plugin. It contains the WordPress plugin header and initializes the plugin functionality.
+
+### 2. Plugin Bootstrap
+
+**File:** `src/Plugin.php`
+
+Coordinates the plugin's components and initialization.
+
+### 3. Project Post Type
+
+**File:** `src/PostTypes/ProjectPostType.php`
+
+Registers the custom post type used to store projects.
+
+### 4. Project Fields
+
+**File:** `src/PostTypes/ProjectFields.php`
+
+Defines additional project fields and their associated handling.
+
+### 5. Project Categories
+
+**File:** `src/Taxonomies/ProjectCategory.php`
+
+Registers the taxonomy used to categorize projects.
+
+### 6. Project Technologies
+
+**File:** `src/Taxonomies/ProjectTechnology.php`
+
+Registers the taxonomy used to associate technologies with projects.
+
+### 7. Admin Settings
+
+**File:** `src/Admin/Settings.php`
+
+Provides plugin settings functionality in the WordPress administration area.
+
+### 8. REST API Controller
+
+**File:** `src/Rest/ProjectRestController.php`
+
+Handles the plugin's project-related REST API functionality.
+
+For available routes, request methods, parameters, and response formats, see:
+
+[`docs/rest-api-documentation.md`](docs/rest-api-documentation.md)
+
+### 9. Project Shortcode
+
+**File:** `src/Shortcodes/ProjectShortcode.php`
+
+Registers and handles the plugin's shortcode functionality.
+
+Check the implementation for the supported shortcode name and attributes.
+
+### 10. Database and Project Views
+
+**File:** `src/Database/ProjectViews.php`
+
+Contains database and project-view-related functionality.
+
+### 11. Activation and Deactivation
+
+Files:
+
+- `includes/activator.php`
+- `includes/deactivator.php`
+
+Contain functionality associated with activating and deactivating the plugin.
+
+### 12. Uninstall Handler
+
+**File:** `uninstall.php`
+
+Contains the plugin's uninstall handling logic.
+
+## REST API
+
+The plugin includes a REST API controller for project-related operations.
+
+For the exact endpoint paths, supported HTTP methods, request parameters, authentication requirements, and response structures, refer to:
+
+**[REST API Documentation](docs/rest-api-documentation.md)**
+
+REST API access depends on the permissions and authentication implemented by the plugin and WordPress.
+
+## Shortcodes
+
+The plugin includes shortcode functionality through `src/Shortcodes/ProjectShortcode.php`.
+
+Before using a shortcode, check the source file for its registered shortcode name and supported attributes. This README does not assume a shortcode name or parameters that have not been verified.
 
 ## Development
 
-The plugin uses WordPress APIs, PHP, JavaScript, and the WordPress React-compatible `wp.element` package.
+The plugin is organized into PHP classes grouped by responsibility.
 
-For local development, install WordPress using a suitable local environment such as XAMPP, activate the plugin, and test the REST API and project listing.
+When modifying the plugin:
 
-## License
+1. Keep project post type functionality in `src/PostTypes/`.
+2. Keep taxonomy functionality in `src/Taxonomies/`.
+3. Keep admin settings in `src/Admin/`.
+4. Keep REST API logic in `src/Rest/`.
+5. Keep shortcode logic in `src/Shortcodes/`.
+6. Keep initialization and component registration in `src/Plugin.php`.
+7. Update the REST API documentation when endpoint behavior changes.
 
-The plugin's license should be specified according to the license chosen for this project. Confirm the applicable license before distributing the plugin publicly.
+### React Frontend Removal
+
+The React frontend has been removed from this plugin version.
+
+The following files are no longer included:
+
+- `assets/css/react-projects.css`
+- `assets/js/react-projects.js`
+- `src/Frontend/ReactProjects.php`
+
+The plugin bootstrap should not import or initialize the removed `ReactProjects` class.
+
+Other plugin functionality should be maintained independently of the removed frontend.
+
+## Testing Checklist
+
+After installing or updating the plugin, verify the following:
+
+- [ ] The plugin activates without PHP errors.
+- [ ] Projects can be created and managed in WordPress.
+- [ ] Project categories and technologies register correctly.
+- [ ] Project custom fields behave as expected.
+- [ ] Admin settings load and save correctly.
+- [ ] REST API routes behave according to the documentation.
+- [ ] The shortcode behaves according to its implementation.
+- [ ] No references to the removed React frontend remain in PHP code.
+- [ ] The WordPress debug log contains no new plugin-related errors.
+
+## Troubleshooting
+
+### Plugin activation fails
+
+Check the PHP error log and confirm that the plugin files are present in the expected directory.
+
+### Projects are not appearing
+
+Verify that the custom post type

@@ -13,7 +13,6 @@ use TechNovz\PMT\Taxonomies\ProjectCategory;
 use TechNovz\PMT\Taxonomies\ProjectTechnology;
 use TechNovz\PMT\PostTypes\ProjectFields;
 use TechNovz\PMT\Database\ProjectViews;
-use TechNovz\PMT\Frontend\ReactProjects;
 
 class Plugin {
 
@@ -29,6 +28,5 @@ class Plugin {
         ( new ProjectTechnology() )->init();
         ( new ProjectFields() )->init();
         ( new ProjectViews() )->init();
-        ( new ReactProjects() )->init();
     }
 }
