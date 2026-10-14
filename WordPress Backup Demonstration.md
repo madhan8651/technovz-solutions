@@ -1,4 +1,4 @@
-# Module 8: WordPress Backup Configuration and Demonstration
+<img width="1917" height="865" alt="image" src="https://github.com/user-attachments/assets/fe682bd0-3e30-4bdc-8436-216f03196605" /># Module 8: WordPress Backup Configuration and Demonstration
 
 **Project:** TechNovz Solutions — WordPress Website and Project Management Toolkit  
 **Backup plugin:** UpdraftPlus  
@@ -40,11 +40,12 @@ Configure a WordPress backup plugin, create a backup of the website files and da
 
 ### Figure 1 — UpdraftPlus Backup / Restore screen
 
-<img width="1917" height="865" alt="image" src="https://github.com/user-attachments/assets/db06debf-7d00-46db-b937-d2d9e5fbd2d8" />
+<img width="1673" height="435" alt="image" src="https://github.com/user-attachments/assets/c560fac4-bbd1-4175-8647-15df4723a5b6" />
+
 
 ### Figure 2 — Backup completion log
 
-![Uploading image.png…]()
+<img width="1917" height="862" alt="image" src="https://github.com/user-attachments/assets/fd428962-a605-4c6b-9d5a-de8f7ad9a148" />
 
 
 ## 6. Result
