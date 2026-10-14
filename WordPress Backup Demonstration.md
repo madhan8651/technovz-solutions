@@ -37,28 +37,20 @@ Configure a WordPress backup plugin, create a backup of the website files and da
 
 ## 5. Screenshot Evidence
 
-Add screenshots captured from the actual WordPress dashboard before submitting this report.
 
 ### Figure 1 — UpdraftPlus Backup / Restore screen
 
-Insert the screenshot showing the backup entry, date, backup components, and **View Log** option.
-
-> **[Insert Screenshot 1 Here]**
+<img width="1917" height="865" alt="image" src="https://github.com/user-attachments/assets/db06debf-7d00-46db-b937-d2d9e5fbd2d8" />
 
 ### Figure 2 — Backup completion log
 
-Insert the end of the log showing the successful completion message and upload status.
+![Uploading image.png…]()
 
-> **[Insert Screenshot 2 Here]**
 
 ## 6. Result
 
 UpdraftPlus displayed a backup entry dated October 13, 2026, at 12:50. The log reported a total backup size of 126.2 MB and stated that the backup succeeded and was complete. The log also recorded successful upload of the database archive to Google Drive and no upload errors.
 
-## 7. Note and Limitation
-
-An extra-whitespace warning was visible on the Backup / Restore page. Although the log reports successful completion, this does not by itself prove that the archive can be restored. Investigate the warning and, if practical, test restoration in a safe environment. Do not test restoration on the working website without a separate recovery plan.
-
-## 8. Conclusion
+## 7. Conclusion
 
 The backup creation demonstration was completed using UpdraftPlus. The dashboard entry and completion log provide evidence for the Module 8 backup requirement. Insert the actual screenshots before submitting this report.
