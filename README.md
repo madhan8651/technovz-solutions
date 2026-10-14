@@ -61,6 +61,30 @@ Current functionality includes:
 
 The theme and plugin are maintained in separate directories within this repository to keep their code organized and easier to maintain.
 
+## 🔐 Security Implementation Checklist
+
+- [x] Sanitize incoming data and validate expected formats.
+- [x] Escape output using `esc_html()`, `esc_attr()`, and `esc_url()`.
+- [x] Use and verify nonces for protected form submissions.
+- [x] Enforce permissions using `current_user_can()`.
+- [x] Use prepared SQL queries to reduce SQL injection risks.
+- [x] Protect forms and administrative actions against CSRF.
+- [x] Configure suitable user roles and permissions.
+- [x] Validate file uploads and restrict allowed file types.
+- [x] Avoid exposing sensitive configuration details.
+- [x] Keep WordPress core, themes, and plugins updated.
+- [x] Configure a backup plugin and create a backup.
+
+## 💾 Backup Demonstration
+
+The UpdraftPlus backup plugin was used to create a WordPress backup.
+
+- **Backup date shown:** October 13, 2026, at 12:50
+- **Reported backup size:** 126.2 MB
+- **Components listed:** Database, Plugins, Themes, Uploads, Must-use plugins, and Other files
+- **Log result:** The backup log reported, “The backup succeeded and is now complete.”
+- **Remote upload:** The log reported that the database archive was uploaded to Google Drive and that there were no upload errors.
+
 ## 📌 Future Improvements
 
 - React-based project display using Vite and React Hooks
