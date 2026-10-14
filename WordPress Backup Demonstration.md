@@ -1,4 +1,4 @@
-<img width="1917" height="865" alt="image" src="https://github.com/user-attachments/assets/fe682bd0-3e30-4bdc-8436-216f03196605" /># Module 8: WordPress Backup Configuration and Demonstration
+WordPress Backup Configuration and Demonstration
 
 **Project:** TechNovz Solutions — WordPress Website and Project Management Toolkit  
 **Backup plugin:** UpdraftPlus  
