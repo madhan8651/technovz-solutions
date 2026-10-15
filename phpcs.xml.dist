@@ -1,0 +1,10 @@
+﻿<?xml version="1.0"?>
+<ruleset name="Technovz WordPress Standards">
+    <description>WordPress Core standards for the Technovz Solutions theme.</description>
+
+    <file>wp-content/themes/technovz-solutions</file>
+    <arg name="extensions" value="php"/>
+    <arg value="s"/>
+
+    <rule ref="WordPress-Core"/>
+</ruleset>

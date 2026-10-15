@@ -103,7 +103,7 @@
 		<div class="footer-bottom">
 
 			<p>
-				&copy; <?php echo esc_html( date( 'Y' ) ); ?>
+				&copy; <?php echo esc_html( wp_date( 'Y' ) ); ?>
 				TechNovz Solutions. All rights reserved.
 			</p>
 
