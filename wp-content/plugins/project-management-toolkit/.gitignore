@@ -1,0 +1,33 @@
+# Operating system and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+auth.json
+credentials.json
+
+# Local backups and archives
+*.sql
+*.sql.gz
+*.zip
+*.tar
+*.tar.gz
+
+# Dependencies, if installed locally
+node_modules/
+vendor/
+
+# OS swap and backup files
+*.swp
+*.swo
+*~
