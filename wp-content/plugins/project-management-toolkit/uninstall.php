@@ -1,8 +1,7 @@
-
 <?php
 
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
-    exit;
+	exit;
 }
 
 // Remove plugin settings when the plugin is deleted.
