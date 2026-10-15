@@ -374,4 +374,3 @@ function technovz_filtered_projects_shortcode() {
     return ob_get_clean();
 }
 add_shortcode( 'technovz_projects', 'technovz_filtered_projects_shortcode' );
-
