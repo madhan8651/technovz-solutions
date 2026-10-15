@@ -8,8 +8,6 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
-
 /**
  * Theme setup.
  */
