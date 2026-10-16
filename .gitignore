@@ -22,3 +22,14 @@ node_modules/
 vendor/
 .vscode/
 .idea/
+
+# Temporary theme CSS backups and audit reports
+wp-content/themes/technovz-solutions/*.backup*
+style.css.backup-*
+theme-css-diff.txt
+theme-css-final-audit.txt
+
+# Local Composer executable copies
+composer
+composer.bat
+composer.phar
