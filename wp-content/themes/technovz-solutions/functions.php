@@ -125,89 +125,85 @@ add_action( 'wp_enqueue_scripts', 'technovz_solutions_enqueue_styles' );
 /* Dynamic Projects Portfolio */
 function technovz_dynamic_projects_shortcode() {
 
-	$projects = new WP_Query(
-		array(
-			'post_type'      => 'pmt_project',
-			'post_status'    => 'publish',
-			'posts_per_page' => -1,
-			'orderby'        => 'date',
-			'order'          => 'DESC',
-		)
-	);
+    $projects = new WP_Query(array(
+        'post_type'      => 'pmt_project',
+        'post_status'    => 'publish',
+        'posts_per_page' => -1,
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+    ));
 
-	ob_start();
+    ob_start();
 
-	if ( $projects->have_posts() ) :
-		echo '<div class="technovz-project-grid">';
+    if ($projects->have_posts()) :
+        echo '<div class="technovz-project-grid">';
 
-		while ( $projects->have_posts() ) :
-			$projects->the_post();
+        while ($projects->have_posts()) :
+            $projects->the_post();
 
-			$description = get_the_excerpt();
+            $description = get_the_excerpt();
 
-			if ( empty( $description ) ) {
-				$description = wp_strip_all_tags(
-					get_the_content()
-				);
-			}
-			?>
+            if (empty($description)) {
+                $description = wp_strip_all_tags(
+                    get_the_content()
+                );
+            }
+            ?>
 
-			<article class="technovz-project-card">
+            <article class="technovz-project-card">
 
-				<a class="technovz-project-image"
-					href="<?php the_permalink(); ?>">
+                <a class="technovz-project-image"
+                   href="<?php the_permalink(); ?>">
 
-					<?php if ( has_post_thumbnail() ) : ?>
-						<?php the_post_thumbnail( 'medium_large' ); ?>
-					<?php else : ?>
-						<div class="technovz-project-no-image">
-							Project Image
-						</div>
-					<?php endif; ?>
+                    <?php if (has_post_thumbnail()) : ?>
+                        <?php the_post_thumbnail('medium_large'); ?>
+                    <?php else : ?>
+                        <div class="technovz-project-no-image">
+                            Project Image
+                        </div>
+                    <?php endif; ?>
 
-				</a>
+                </a>
 
-				<div class="technovz-project-content">
+                <div class="technovz-project-content">
 
-					<h3>
-						<a href="<?php the_permalink(); ?>">
-							<?php the_title(); ?>
-						</a>
-					</h3>
+                    <h3>
+                        <a href="<?php the_permalink(); ?>">
+                            <?php the_title(); ?>
+                        </a>
+                    </h3>
 
-					<p>
-						<?php
-						echo esc_html(
-							wp_trim_words( $description, 25 )
-						);
-						?>
-					</p>
+                    <p>
+                        <?php echo esc_html(
+                            wp_trim_words($description, 25)
+                        ); ?>
+                    </p>
 
-					<a class="technovz-project-button"
-						href="<?php the_permalink(); ?>">
-						View Project →
-					</a>
+                    <a class="technovz-project-button"
+                       href="<?php the_permalink(); ?>">
+                        View Project →
+                    </a>
 
-				</div>
+                </div>
 
-			</article>
+            </article>
 
-			<?php
-		endwhile;
+            <?php
+        endwhile;
 
-		echo '</div>';
+        echo '</div>';
 
-	else :
-		echo '<p>No projects have been published yet.</p>';
-	endif;
+    else :
+        echo '<p>No projects have been published yet.</p>';
+    endif;
 
-	wp_reset_postdata();
+    wp_reset_postdata();
 
-	return ob_get_clean();
+    return ob_get_clean();
 }
 add_shortcode(
-	'technovz_projects',
-	'technovz_dynamic_projects_shortcode'
+    'technovz_projects',
+    'technovz_dynamic_projects_shortcode'
 );
 
 /**
@@ -215,173 +211,267 @@ add_shortcode(
  * Shortcode: [technovz_projects]
  */
 function technovz_filtered_projects_shortcode() {
-	$search     = isset( $_GET['project_search'] )
-		? sanitize_text_field( wp_unslash( $_GET['project_search'] ) )
-		: '';
-	$category   = isset( $_GET['project_category'] )
-		? absint( $_GET['project_category'] )
-		: 0;
-	$technology = isset( $_GET['project_technology'] )
-		? absint( $_GET['project_technology'] )
-		: 0;
-	$status     = isset( $_GET['project_status'] )
-		? sanitize_text_field( wp_unslash( $_GET['project_status'] ) )
-		: '';
+    $search     = isset( $_GET['project_search'] )
+        ? sanitize_text_field( wp_unslash( $_GET['project_search'] ) )
+        : '';
+    $category   = isset( $_GET['project_category'] )
+        ? absint( $_GET['project_category'] )
+        : 0;
+    $technology = isset( $_GET['project_technology'] )
+        ? absint( $_GET['project_technology'] )
+        : 0;
+    $status     = isset( $_GET['project_status'] )
+        ? sanitize_text_field( wp_unslash( $_GET['project_status'] ) )
+        : '';
 
-	$tax_query = array( 'relation' => 'AND' );
+    $tax_query = array( 'relation' => 'AND' );
 
-	if ( $category ) {
-		$tax_query[] = array(
-			'taxonomy' => 'pmt_project_category',
-			'field'    => 'term_id',
-			'terms'    => $category,
-		);
-	}
+    if ( $category ) {
+        $tax_query[] = array(
+            'taxonomy' => 'pmt_project_category',
+            'field'    => 'term_id',
+            'terms'    => $category,
+        );
+    }
 
-	if ( $technology ) {
-		$tax_query[] = array(
-			'taxonomy' => 'pmt_project_technology',
-			'field'    => 'term_id',
-			'terms'    => $technology,
-		);
-	}
+    if ( $technology ) {
+        $tax_query[] = array(
+            'taxonomy' => 'pmt_project_technology',
+            'field'    => 'term_id',
+            'terms'    => $technology,
+        );
+    }
 
-	$args = array(
-		'post_type'      => 'pmt_project',
-		'post_status'    => 'publish',
-		'posts_per_page' => -1,
-		's'              => $search,
-	);
+    $args = array(
+        'post_type'      => 'pmt_project',
+        'post_status'    => 'publish',
+        'posts_per_page' => -1,
+        's'              => $search,
+    );
 
-	if ( count( $tax_query ) > 1 ) {
-		$args['tax_query'] = $tax_query;
-	}
+    if ( count( $tax_query ) > 1 ) {
+        $args['tax_query'] = $tax_query;
+    }
 
-	if ( in_array( $status, array( 'Planned', 'In Progress', 'Completed' ), true ) ) {
-		$args['meta_query'] = array(
-			array(
-				'key'     => '_pmt_project_status',
-				'value'   => $status,
-				'compare' => '=',
-			),
-		);
-	}
+    if ( in_array( $status, array( 'Planned', 'In Progress', 'Completed' ), true ) ) {
+        $args['meta_query'] = array(
+            array(
+                'key'     => '_pmt_project_status',
+                'value'   => $status,
+                'compare' => '=',
+            ),
+        );
+    }
 
-	$projects = new WP_Query( $args );
+    $projects = new WP_Query( $args );
 
-	$categories = get_terms(
-		array(
-			'taxonomy'   => 'pmt_project_category',
-			'hide_empty' => false,
-		)
-	);
+    $categories = get_terms( array(
+        'taxonomy'   => 'pmt_project_category',
+        'hide_empty' => false,
+    ) );
 
-	$technologies = get_terms(
-		array(
-			'taxonomy'   => 'pmt_project_technology',
-			'hide_empty' => false,
-		)
-	);
+    $technologies = get_terms( array(
+        'taxonomy'   => 'pmt_project_technology',
+        'hide_empty' => false,
+    ) );
 
-	ob_start();
-	?>
-	<form method="get" class="project-filter-form">
-		<input
-			type="search"
-			name="project_search"
-			placeholder="Search projects..."
-			value="<?php echo esc_attr( $search ); ?>"
-		>
+    ob_start();
+    ?>
+    <form method="get" class="project-filter-form">
+        <input
+            type="search"
+            name="project_search"
+            placeholder="Search projects..."
+            value="<?php echo esc_attr( $search ); ?>"
+        >
 
-		<select name="project_category">
-			<option value="">All Categories</option>
-			<?php if ( ! is_wp_error( $categories ) ) : ?>
-				<?php foreach ( $categories as $term ) : ?>
-					<option
-						value="<?php echo esc_attr( $term->term_id ); ?>"
-						<?php selected( $category, $term->term_id ); ?>
-					>
-						<?php echo esc_html( $term->name ); ?>
-					</option>
-				<?php endforeach; ?>
-			<?php endif; ?>
-		</select>
+        <select name="project_category">
+            <option value="">All Categories</option>
+            <?php if ( ! is_wp_error( $categories ) ) : ?>
+                <?php foreach ( $categories as $term ) : ?>
+                    <option
+                        value="<?php echo esc_attr( $term->term_id ); ?>"
+                        <?php selected( $category, $term->term_id ); ?>
+                    >
+                        <?php echo esc_html( $term->name ); ?>
+                    </option>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </select>
 
-		<select name="project_technology">
-			<option value="">All Technologies</option>
-			<?php if ( ! is_wp_error( $technologies ) ) : ?>
-				<?php foreach ( $technologies as $term ) : ?>
-					<option
-						value="<?php echo esc_attr( $term->term_id ); ?>"
-						<?php selected( $technology, $term->term_id ); ?>
-					>
-						<?php echo esc_html( $term->name ); ?>
-					</option>
-				<?php endforeach; ?>
-			<?php endif; ?>
-		</select>
+        <select name="project_technology">
+            <option value="">All Technologies</option>
+            <?php if ( ! is_wp_error( $technologies ) ) : ?>
+                <?php foreach ( $technologies as $term ) : ?>
+                    <option
+                        value="<?php echo esc_attr( $term->term_id ); ?>"
+                        <?php selected( $technology, $term->term_id ); ?>
+                    >
+                        <?php echo esc_html( $term->name ); ?>
+                    </option>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </select>
 
-		<select name="project_status">
-			<option value="">All Statuses</option>
-			<?php foreach ( array( 'Planned', 'In Progress', 'Completed' ) as $option ) : ?>
-				<option
-					value="<?php echo esc_attr( $option ); ?>"
-					<?php selected( $status, $option ); ?>
-				>
-					<?php echo esc_html( $option ); ?>
-				</option>
-			<?php endforeach; ?>
-		</select>
+        <select name="project_status">
+            <option value="">All Statuses</option>
+            <?php foreach ( array( 'Planned', 'In Progress', 'Completed' ) as $option ) : ?>
+                <option
+                    value="<?php echo esc_attr( $option ); ?>"
+                    <?php selected( $status, $option ); ?>
+                >
+                    <?php echo esc_html( $option ); ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
 
-		<button type="submit">Filter Projects</button>
-		<a href="<?php echo esc_url( get_permalink() ); ?>">Clear</a>
-	</form>
+        <button type="submit">Filter Projects</button>
+        <a href="<?php echo esc_url( get_permalink() ); ?>">Clear</a>
+    </form>
 
-	<div class="technovz-project-grid">
-		<?php if ( $projects->have_posts() ) : ?>
-			<?php
-			while ( $projects->have_posts() ) :
-				$projects->the_post();
-				?>
-				<article class="technovz-project-card">
-					<a href="<?php echo esc_url( get_permalink() ); ?>">
-						<?php if ( has_post_thumbnail() ) : ?>
-							<?php the_post_thumbnail( 'medium_large' ); ?>
-						<?php endif; ?>
-						<h3><?php echo esc_html( get_the_title() ); ?></h3>
-					</a>
+    <div class="technovz-project-grid">
+        <?php if ( $projects->have_posts() ) : ?>
+            <?php while ( $projects->have_posts() ) : $projects->the_post(); ?>
+                <article class="technovz-project-card">
+                    <a href="<?php echo esc_url( get_permalink() ); ?>">
+                        <?php if ( has_post_thumbnail() ) : ?>
+                            <?php the_post_thumbnail( 'medium_large' ); ?>
+                        <?php endif; ?>
+                        <h3><?php echo esc_html( get_the_title() ); ?></h3>
+                    </a>
 
-					<div class="project-excerpt">
-						<?php echo esc_html( get_the_excerpt() ); ?>
-					</div>
+                    <div class="project-excerpt">
+                        <?php echo esc_html( get_the_excerpt() ); ?>
+                    </div>
 
-					<?php
-					$project_status = get_post_meta(
-						get_the_ID(),
-						'_pmt_project_status',
-						true
-					);
-					?>
-					<?php if ( $project_status ) : ?>
-						<p>
-							<strong>Status:</strong>
-							<?php echo esc_html( $project_status ); ?>
-						</p>
-					<?php endif; ?>
+                    <?php
+                    $project_status = get_post_meta(
+                        get_the_ID(),
+                        '_pmt_project_status',
+                        true
+                    );
+                    ?>
+                    <?php if ( $project_status ) : ?>
+                        <p>
+                            <strong>Status:</strong>
+                            <?php echo esc_html( $project_status ); ?>
+                        </p>
+                    <?php endif; ?>
 
-					<a href="<?php echo esc_url( get_permalink() ); ?>">
-						View Project
-					</a>
-				</article>
-			<?php endwhile; ?>
-		<?php else : ?>
-			<p>No projects match your filters.</p>
-		<?php endif; ?>
-	</div>
-	<?php
+                    <a href="<?php echo esc_url( get_permalink() ); ?>">
+                        View Project
+                    </a>
+                </article>
+            <?php endwhile; ?>
+        <?php else : ?>
+            <p>No projects match your filters.</p>
+        <?php endif; ?>
+    </div>
+    <?php
 
-	wp_reset_postdata();
+    wp_reset_postdata();
 
-	return ob_get_clean();
+    return ob_get_clean();
 }
 add_shortcode( 'technovz_projects', 'technovz_filtered_projects_shortcode' );
+
+/**
+ * TechNovz: Show a bottom cart popup after AJAX add-to-cart.
+ */
+add_action( 'wp_footer', function () {
+    if ( ! function_exists( 'is_woocommerce' ) ||
+        ( ! is_shop() && ! is_product_taxonomy() && ! is_product() ) ) {
+        return;
+    }
+
+    $cart_url = wc_get_cart_url();
+    ?>
+    <style>
+        #technovz-cart-toast {
+            position: fixed;
+            left: 50%;
+            bottom: 24px;
+            transform: translateX(-50%);
+            width: min(560px, calc(100% - 30px));
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 18px 20px;
+            background: #fff;
+            color: #263b53;
+            border: 1px solid #dbe5f0;
+            border-top: 4px solid #84b400;
+            border-radius: 12px;
+            box-shadow: 0 10px 35px rgba(20,40,70,.18);
+            z-index: 999999;
+            box-sizing: border-box;
+        }
+        #technovz-cart-toast.is-visible {
+            display: flex;
+        }
+        #technovz-cart-toast .toast-message {
+            font-size: 15px;
+            line-height: 1.5;
+        }
+        #technovz-cart-toast .toast-cart-link {
+            flex-shrink: 0;
+            display: inline-block;
+            padding: 10px 16px;
+            background: #263b53;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 7px;
+            font-weight: 600;
+        }
+        #technovz-cart-toast .toast-cart-link:hover {
+            background: #345273;
+            color: #fff;
+        }
+        @media (max-width: 480px) {
+            #technovz-cart-toast {
+                gap: 10px;
+                padding: 14px;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+
+    <div id="technovz-cart-toast" role="status" aria-live="polite">
+       <span class="toast-message">
+    <span class="toast-check" aria-hidden="true">✓</span>
+    <span class="toast-text">Product added to your cart.</span>
+</span>
+        <a class="toast-cart-link"
+           href="<?php echo esc_url( $cart_url ); ?>">View cart</a>
+    </div>
+
+    <script>
+    jQuery(function ($) {
+        var $toast = $('#technovz-cart-toast');
+
+        $(document.body).on('added_to_cart', function (event, fragments, cartHash, $button) {
+            var productName = 'Product';
+
+            if ($button && $button.length) {
+                var $product = $button.closest('li.product, .product');
+                var title = $product.find(
+                    '.woocommerce-loop-product__title, .product_title'
+                ).first().text().trim();
+
+                if (title) {
+                    productName = title;
+                }
+            }
+
+           $toast.find('.toast-text').text(
+    productName + ' has been added to your cart.'
+);
+
+            $toast.addClass('is-visible');
+
+        });
+    });
+    </script>
+    <?php
+}, 99 );
