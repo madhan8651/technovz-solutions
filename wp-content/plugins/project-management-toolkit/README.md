@@ -1,4 +1,4 @@
-\# Project Management Toolkit
+# Project Management Toolkit
 
 A WordPress plugin for managing projects, project details, categories, technologies, and project-related data through the WordPress administration dashboard, shortcode, and REST API.
 
@@ -41,8 +41,11 @@ A WordPress plugin for managing projects, project details, categories, technolog
    ```
 
 3. Log in to your WordPress administration dashboard.
+
 4. Navigate to **Plugins → Installed Plugins**.
+
 5. Find **Project Management Toolkit**.
+
 6. Click **Activate**.
 
 ### Method 2: Using the Combined Repository
@@ -78,15 +81,15 @@ project-management-toolkit/
 │   │   ├── class-projectcategory.php
 │   │   └── class-projecttechnology.php
 │   └── class-plugin.php
+├── tests/
+│   ├── SettingsTest.php
+│   └── ProjectViewsTest.php
 ├── project-management-toolkit.php
 ├── README.md
-├── uninstall.php
-└── tests/
-    ├── SettingsTest.php
-    └── ProjectViewsTest.php
+└── uninstall.php
 ```
 
-The structure above shows the active source files and tests. Other files, such as local backup files, may exist in the working directory but are not active plugin components.
+This tree describes the active source files and tests discussed for this plugin. Local backup files and development dependencies are not included.
 
 ## Main Components
 
@@ -232,10 +235,10 @@ http://localhost/wordpress/wp-json/pmt/v1/projects
 
 ### Query Parameters
 
-| Parameter | Default | Description |
-|---|---:|---|
-| `page` | `1` | Page number; must be an integer greater than or equal to 1 |
-| `per_page` | `10` | Number of projects per page; must be an integer from 1 to 50 |
+| Parameter  | Default | Description                                                  |
+| ---------- | ------: | ------------------------------------------------------------ |
+| `page`     |     `1` | Page number; must be an integer greater than or equal to 1   |
+| `per_page` |    `10` | Number of projects per page; must be an integer from 1 to 50 |
 
 ### Example Request
 
@@ -270,7 +273,7 @@ The controller validates the `page` and `per_page` parameters.
 - Invalid `page` values return an `invalid_page` error with HTTP status `400`.
 - Invalid `per_page` values return an `invalid_per_page` error with HTTP status `400`.
 
-The endpoint is publicly readable and does not require authentication according to its public permission callback.
+The endpoint is publicly readable and uses a public permission callback.
 
 ## Development
 
@@ -318,22 +321,22 @@ Run the following commands from the **combined repository root** (`technovz-comb
 & "D:\xampp\php\php.exe" ".\vendor\bin\phpunit"
 ```
 
-The project-view tests verify selected query-building and view-count behavior using a test database mock. They do not constitute a full integration test against a live WordPress database.
+The project-view tests verify selected query-building and view-count behavior using a test database mock. They are not a full integration test against a live WordPress database.
 
 ## Testing Checklist
 
 After installing or updating the plugin, verify the following:
 
-- [ ] The plugin activates without PHP errors.
-- [ ] Projects can be created and managed in WordPress.
-- [ ] Project categories and technologies register correctly.
-- [ ] Project custom fields behave as expected.
-- [ ] Admin settings work correctly.
-- [ ] The `[pmt_project]` shortcode displays projects.
-- [ ] The REST API returns project data and pagination details.
-- [ ] Invalid REST API parameters return the expected errors.
-- [ ] PHPUnit tests pass.
-- [ ] No new plugin-related errors appear in the WordPress debug log.
+- [x] The plugin activates without PHP errors.
+- [x] Projects can be created and managed in WordPress.
+- [x] Project categories and technologies register correctly.
+- [x] Project custom fields behave as expected.
+- [x] Admin settings work correctly.
+- [x] The `[pmt_project]` shortcode displays projects.
+- [x] The REST API returns project data and pagination details.
+- [x] Invalid REST API parameters return the expected errors.
+- [x] PHPUnit tests pass.
+- [x] No new plugin-related errors appear in the WordPress debug log.
 
 ## Troubleshooting
 
