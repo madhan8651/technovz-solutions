@@ -13,13 +13,14 @@ get_header();
 	<header class="page-header">
 
 		<h1 class="page-title">
-			<?php
-			printf(
-				esc_html__( 'Search Results for: %s', 'technovz-solutions' ),
-				'<span>' . esc_html( get_search_query() ) . '</span>'
-			);
-			?>
-		</h1>
+	<?php
+	printf(
+		/* translators: %s: Search query. */
+		esc_html__( 'Search Results for: %s', 'technovz-solutions' ),
+		'<span>' . esc_html( get_search_query() ) . '</span>'
+	);
+	?>
+</h1>
 
 	</header>
 
@@ -27,13 +28,13 @@ get_header();
 	<?php if ( have_posts() ) : ?>
 
 		<?php
-while ( have_posts() ) :
-	the_post();
+		while ( have_posts() ) :
+			the_post();
 
-	get_template_part( 'template-parts/content', get_post_type() );
+			get_template_part( 'template-parts/content', get_post_type() );
 
 endwhile;
-?>
+		?>
 
 
 		<?php the_posts_navigation(); ?>

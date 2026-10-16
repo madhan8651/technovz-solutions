@@ -1,8 +1,48 @@
 # TechNovz Solutions — WordPress Theme & Plugin
 
-A WordPress development project containing the **TechNovz Solutions theme** and the **Project Management Toolkit plugin**, maintained together in one repository.
+A combined WordPress development repository containing the TechNovz Solutions child theme and the Project Management Toolkit plugin.
 
-## 📁 Project Structure
+## Project Overview
+
+This repository keeps the website theme and custom plugin in one Git repository while maintaining their code in separate directories.
+
+### WordPress Theme
+
+**Location:** `wp-content/themes/technovz-solutions/`
+
+The TechNovz Solutions theme provides the website presentation, templates, responsive styling, navigation, footer, and reusable template parts.
+
+### Project Management Toolkit
+
+**Location:** `wp-content/plugins/project-management-toolkit/`
+
+The plugin provides project management functionality within WordPress.
+
+Its current components include:
+
+- Custom project post type
+- Project categories and technologies
+- Additional project fields
+- Project-related database and view functionality
+- REST API integration
+- Shortcode functionality
+- Administrative settings
+- Activation, deactivation, and uninstall handlers
+
+See the [plugin README](wp-content/plugins/project-management-toolkit/README.md) for component details and testing guidance.
+
+## Technology Stack
+
+- WordPress
+- PHP
+- MySQL or MariaDB
+- HTML5 and CSS3
+- JavaScript
+- Git and GitHub
+- XAMPP for local development
+- Composer and PHP development tools where configured
+
+## Repository Structure
 
 ```text
 technovz-combined/
@@ -11,87 +51,92 @@ technovz-combined/
 │   │   └── technovz-solutions/
 │   └── plugins/
 │       └── project-management-toolkit/
-├── .gitignore
-└── README.md
+├── README.md
+└── .gitignore
 ```
 
-## 🎨 WordPress Theme
+The theme and plugin each have their own README and supporting files.
 
-**Location:** `wp-content/themes/technovz-solutions/`
+## Local Installation
 
-The TechNovz Solutions theme provides the website's presentation and layout.
+### Requirements
 
-Features depend on the current theme implementation and include its templates, styles, and WordPress theme integration.
+- A working WordPress installation
+- PHP compatible with the installed WordPress version and plugin
+- MySQL or MariaDB
+- A local web server such as XAMPP
 
-## 🧩 Project Management Toolkit Plugin
+### Setup
 
-**Location:** `wp-content/plugins/project-management-toolkit/`
+1. Start Apache and MySQL from the XAMPP Control Panel.
+2. Create or configure a working WordPress installation.
+3. Copy `wp-content/themes/technovz-solutions/` into the WordPress themes directory.
+4. Copy `wp-content/plugins/project-management-toolkit/` into the WordPress plugins directory.
+5. Open the WordPress administration dashboard.
+6. Activate the TechNovz Solutions child theme under **Appearance → Themes**.
+7. Activate Project Management Toolkit under **Plugins → Installed Plugins**.
+8. Create project entries and configure the site as required.
 
-The plugin provides project management and project display functionality within WordPress.
+**Important:** Install the theme's required parent theme before activating the child theme.
 
-Current functionality includes:
+## Development Workflow
 
-- Project post type and project data management
-- Project categories and technologies
-- Project fields and project views
-- Project display through the `[pmt_project]` shortcode
-- WordPress REST API integration
+The repository uses Git for version control.
 
-## 🛠️ Development Environment
+Check your current branch and working-tree changes before making updates:
 
-- WordPress
-- PHP
-- MySQL / MariaDB
-- HTML and CSS
-- JavaScript
-- Git and GitHub
-- XAMPP for local development
+```powershell
+git status -sb
+git branch -vv
+```
 
-## 🚀 Local Installation
+Run PHP syntax checks on modified PHP files:
 
-1. Install and start Apache and MySQL using XAMPP.
-2. Set up a local WordPress installation.
-3. Copy the theme into `wp-content/themes/`.
-4. Copy the plugin into `wp-content/plugins/`.
-5. Activate the TechNovz Solutions theme from the WordPress dashboard.
-6. Activate the Project Management Toolkit plugin.
-7. Configure the website and create projects as required.
+```powershell
+php -l path/to/file.php
+```
 
-## 🌿 Repository Structure
+Run the configured WordPress Core coding-standard checks when the development dependencies are installed:
 
-The theme and plugin are maintained in separate directories within this repository to keep their code organized and easier to maintain.
+```powershell
+.\vendor\bin\phpcs.bat --standard=WordPress-Core -s --extensions=php .\wp-content\themes\technovz-solutions
+```
 
-## 🔐 Security Implementation Checklist
+```powershell
+.\vendor\bin\phpcs.bat --standard=WordPress-Core -s --extensions=php .\wp-content\plugins\project-management-toolkit
+```
 
-- [x] Sanitize incoming data and validate expected formats.
-- [x] Escape output using `esc_html()`, `esc_attr()`, and `esc_url()`.
-- [x] Use and verify nonces for protected form submissions.
-- [x] Enforce permissions using `current_user_can()`.
-- [x] Use prepared SQL queries to reduce SQL injection risks.
-- [x] Protect forms and administrative actions against CSRF.
-- [x] Configure suitable user roles and permissions.
-- [x] Validate file uploads and restrict allowed file types.
-- [x] Avoid exposing sensitive configuration details.
-- [x] Keep WordPress core, themes, and plugins updated.
-- [x] Configure a backup plugin and create a backup.
+Review changes before staging or committing:
 
-## 💾 Backup Demonstration
+```powershell
+git diff
+git diff --check
+git status --short
+```
 
-The UpdraftPlus backup plugin was used to create a WordPress backup.
+Stage only the files intended for a commit. Avoid `git add -A` when unrelated changes or deletions are present.
 
-- **Backup date shown:** October 13, 2026, at 12:50
-- **Reported backup size:** 126.2 MB
-- **Components listed:** Database, Plugins, Themes, Uploads, Must-use plugins, and Other files
-- **Log result:** The backup log reported, “The backup succeeded and is now complete.”
-- **Remote upload:** The log reported that the database archive was uploaded to Google Drive and that there were no upload errors.
+## Testing Checklist
 
-## 📌 Future Improvements
+After making changes, verify the following as applicable:
 
-- React-based project display using Vite and React Hooks
-- Dynamic project loading with a Load More button
-- Further improvements to project presentation and responsiveness
+- [ ] The WordPress dashboard loads without PHP fatal errors.
+- [ ] The theme activates and the website renders correctly.
+- [ ] Project pages and individual project details work.
+- [ ] The plugin activates without errors.
+- [ ] Project management, categories, technologies, and fields work as expected.
+- [ ] REST API and shortcode behavior match their implementations.
+- [ ] PHP syntax checks pass.
+- [ ] Coding-standard checks pass.
+- [ ] Git changes are reviewed before committing.
 
----
+## Documentation
 
-**TechNovz Solutions**  
-WordPress Theme and Plugin Development Project
+- [Theme documentation](wp-content/themes/technovz-solutions/README.md)
+- [Plugin documentation](wp-content/plugins/project-management-toolkit/README.md)
+
+For API routes, parameters, and response details, consult the plugin's REST API documentation when available.
+
+## Maintainer
+
+GitHub: [@madhan8651](https://github.com/madhan8651)

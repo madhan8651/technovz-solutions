@@ -1,6 +1,6 @@
-# Project Management Toolkit
+\# Project Management Toolkit
 
-A WordPress plugin for managing projects, project details, categories, technologies, and project-related data through the WordPress admin dashboard and REST API.
+A WordPress plugin for managing projects, project details, categories, technologies, and project-related data through the WordPress administration dashboard, shortcode, and REST API.
 
 ## Features
 
@@ -9,22 +9,24 @@ A WordPress plugin for managing projects, project details, categories, technolog
 - **Project Categories:** Organize projects into categories.
 - **Project Technologies:** Associate technologies with projects.
 - **Custom Project Fields:** Store additional project information.
-- **REST API:** Provides endpoints for retrieving and managing project data.
-- **Shortcode Support:** Display project information using WordPress shortcodes.
-- **Admin Settings:** Configure plugin-related settings from the WordPress dashboard.
-- **Database Support:** Includes project view and database-related functionality.
+- **REST API:** Retrieve published project data through a public REST endpoint.
+- **Shortcode Support:** Display project information using `[pmt_project]`.
+- **Admin Settings:** Configure plugin-related settings through the WordPress dashboard.
+- **Database Support:** Includes project-view tracking and database functionality.
 - **Activation and Deactivation:** Handles plugin activation and deactivation routines.
 - **Uninstall Support:** Includes an uninstall handler.
+- **Automated Tests:** PHPUnit tests for selected plugin functionality.
 
 ## Requirements
 
 - WordPress
-- PHP version compatible with your WordPress installation
-- A MySQL or MariaDB database supported by WordPress
+- PHP compatible with your WordPress installation
+- MySQL or MariaDB supported by WordPress
+- Composer and PHPUnit for development and testing
 
 ## Installation
 
-### Method 1: Install Manually
+### Method 1: Manual Installation
 
 1. Copy the `project-management-toolkit` folder into:
 
@@ -38,55 +40,53 @@ A WordPress plugin for managing projects, project details, categories, technolog
    wp-content/plugins/project-management-toolkit/project-management-toolkit.php
    ```
 
-3. Log in to the WordPress admin dashboard.
+3. Log in to your WordPress administration dashboard.
 4. Navigate to **Plugins → Installed Plugins**.
 5. Find **Project Management Toolkit**.
 6. Click **Activate**.
 
 ### Method 2: Using the Combined Repository
 
-If you are using the Technovz Solutions combined repository, the plugin is located at:
+In the TechNovz Solutions combined repository, the plugin is located at:
 
 ```text
 wp-content/plugins/project-management-toolkit/
 ```
 
-Place the repository's `wp-content` directory into the corresponding location in your WordPress installation, or copy the plugin folder into the existing `wp-content/plugins/` directory.
+Copy the plugin folder into your WordPress installation's `wp-content/plugins/` directory if it is not already there.
 
 ## Project Structure
 
 ```text
 project-management-toolkit/
-├── assets/
-│   └── (non-React plugin assets, if required)
-├── docs/
-│   └── rest-api-documentation.md
 ├── includes/
-│   ├── activator.php
-│   └── deactivator.php
+│   ├── class-pmt-activator.php
+│   └── class-pmt-deactivator.php
 ├── src/
 │   ├── Admin/
-│   │   └── Settings.php
+│   │   └── class-settings.php
 │   ├── Database/
-│   │   └── ProjectViews.php
+│   │   └── class-projectviews.php
 │   ├── PostTypes/
-│   │   ├── ProjectFields.php
-│   │   └── ProjectPostType.php
+│   │   ├── class-projectfields.php
+│   │   └── class-projectposttype.php
 │   ├── Rest/
-│   │   └── ProjectRestController.php
+│   │   └── class-projectrestcontroller.php
 │   ├── Shortcodes/
-│   │   └── ProjectShortcode.php
+│   │   └── class-projectshortcode.php
 │   ├── Taxonomies/
-│   │   ├── ProjectCategory.php
-│   │   └── ProjectTechnology.php
-│   └── Plugin.php
-├── .gitignore
+│   │   ├── class-projectcategory.php
+│   │   └── class-projecttechnology.php
+│   └── class-plugin.php
 ├── project-management-toolkit.php
 ├── README.md
-└── uninstall.php
+├── uninstall.php
+└── tests/
+    ├── SettingsTest.php
+    └── ProjectViewsTest.php
 ```
 
-The `assets/` directory is reserved for any non-React assets the plugin still needs. The React frontend files have been removed.
+The structure above shows the active source files and tests. Other files, such as local backup files, may exist in the working directory but are not active plugin components.
 
 ## Main Components
 
@@ -94,76 +94,80 @@ The `assets/` directory is reserved for any non-React assets the plugin still ne
 
 **File:** `project-management-toolkit.php`
 
-The main entry point for the plugin. It contains the WordPress plugin header and initializes the plugin functionality.
+The main entry point for the plugin. It contains the WordPress plugin header, defines plugin constants, loads activation and deactivation handlers, and initializes the plugin.
+
+It also provides the autoloading mechanism for classes in the `TechNovz\PMT` namespace.
 
 ### 2. Plugin Bootstrap
 
-**File:** `src/Plugin.php`
+**File:** `src/class-plugin.php`
 
-Coordinates the plugin's components and initialization.
+Initializes the plugin's components, including:
+
+- Project post type
+- Project categories and technologies
+- Project fields
+- Admin settings
+- REST API controller
+- Project shortcode
+- Project-view tracking
 
 ### 3. Project Post Type
 
-**File:** `src/PostTypes/ProjectPostType.php`
+**File:** `src/PostTypes/class-projectposttype.php`
 
-Registers the custom post type used to store projects.
+Registers the custom post type used to store and manage project entries.
 
 ### 4. Project Fields
 
-**File:** `src/PostTypes/ProjectFields.php`
+**File:** `src/PostTypes/class-projectfields.php`
 
-Defines additional project fields and their associated handling.
+Handles additional project fields and their associated WordPress functionality.
 
 ### 5. Project Categories
 
-**File:** `src/Taxonomies/ProjectCategory.php`
+**File:** `src/Taxonomies/class-projectcategory.php`
 
-Registers the taxonomy used to categorize projects.
+Registers the taxonomy used to organize projects into categories.
 
 ### 6. Project Technologies
 
-**File:** `src/Taxonomies/ProjectTechnology.php`
+**File:** `src/Taxonomies/class-projecttechnology.php`
 
 Registers the taxonomy used to associate technologies with projects.
 
 ### 7. Admin Settings
 
-**File:** `src/Admin/Settings.php`
+**File:** `src/Admin/class-settings.php`
 
-Provides plugin settings functionality in the WordPress administration area.
+Provides administration settings and dashboard functionality.
 
 ### 8. REST API Controller
 
-**File:** `src/Rest/ProjectRestController.php`
+**File:** `src/Rest/class-projectrestcontroller.php`
 
-Handles the plugin's project-related REST API functionality.
-
-For available routes, request methods, parameters, and response formats, see:
-
-[`docs/rest-api-documentation.md`](docs/rest-api-documentation.md)
+Registers the REST API route and handles requests for published projects.
 
 ### 9. Project Shortcode
 
-**File:** `src/Shortcodes/ProjectShortcode.php`
+**File:** `src/Shortcodes/class-projectshortcode.php`
 
-Registers and handles the plugin's shortcode functionality.
-
-Check the implementation for the supported shortcode name and attributes.
+Registers and renders the `[pmt_project]` shortcode.
 
 ### 10. Database and Project Views
 
-**File:** `src/Database/ProjectViews.php`
+**File:** `src/Database/class-projectviews.php`
 
-Contains database and project-view-related functionality.
+Handles project-view tracking and database queries for project view counts.
 
 ### 11. Activation and Deactivation
 
 Files:
 
-- `includes/activator.php`
-- `includes/deactivator.php`
+- `includes/class-pmt-activator.php`
+- `includes/class-pmt-deactivator.php`
 
-Contain functionality associated with activating and deactivating the plugin.
+Contain the plugin's activation and deactivation routines.
 
 ### 12. Uninstall Handler
 
@@ -171,21 +175,102 @@ Contain functionality associated with activating and deactivating the plugin.
 
 Contains the plugin's uninstall handling logic.
 
+## WordPress Hooks
+
+The plugin uses WordPress hooks to register and initialize its functionality.
+
+- `plugins_loaded`: Loads and initializes the plugin.
+- `init`: Initializes plugin functionality and registers the project post type and taxonomies.
+- `admin_menu`: Adds the administration menu.
+- `admin_init`: Initializes administration settings.
+- `wp_dashboard_setup`: Registers dashboard functionality.
+- `rest_api_init`: Registers the REST API route.
+- `wp_enqueue_scripts`: Handles shortcode-related frontend styling.
+- `template_redirect`: Supports project-view tracking.
+- `register_activation_hook()`: Registers the activation handler.
+- `register_deactivation_hook()`: Registers the deactivation handler.
+
+The implementation details are maintained in the relevant PHP classes.
+
+## Shortcode Usage
+
+### Display the Latest Projects
+
+Add this shortcode to a WordPress page or post:
+
+```text
+[pmt_project]
+```
+
+When no project ID is specified, the shortcode displays up to 10 published projects, ordered by publication date.
+
+### Display a Specific Project
+
+```text
+[pmt_project id="123"]
+```
+
+Replace `123` with the actual WordPress post ID of a published project.
+
+If the specified project does not exist, is not a project post, or is not published, the shortcode displays a **No projects found** message.
+
 ## REST API
 
-The plugin includes a REST API controller for project-related operations.
+The plugin provides a public, read-only endpoint for retrieving published projects.
 
-For the exact endpoint paths, supported HTTP methods, request parameters, authentication requirements, and response structures, refer to:
+### Endpoint
 
-**[REST API Documentation](docs/rest-api-documentation.md)**
+```http
+GET /wp-json/pmt/v1/projects
+```
 
-REST API access depends on the permissions and authentication implemented by the plugin and WordPress.
+For a local WordPress site at `http://localhost/wordpress`, use:
 
-## Shortcodes
+```text
+http://localhost/wordpress/wp-json/pmt/v1/projects
+```
 
-The plugin includes shortcode functionality through `src/Shortcodes/ProjectShortcode.php`.
+### Query Parameters
 
-Before using a shortcode, check the source file for its registered shortcode name and supported attributes. This README does not assume a shortcode name or parameters that have not been verified.
+| Parameter | Default | Description |
+|---|---:|---|
+| `page` | `1` | Page number; must be an integer greater than or equal to 1 |
+| `per_page` | `10` | Number of projects per page; must be an integer from 1 to 50 |
+
+### Example Request
+
+```text
+http://localhost/wordpress/wp-json/pmt/v1/projects?page=1&per_page=10
+```
+
+### Response Data
+
+A successful response includes a success indicator, project data, and pagination information.
+
+Each project contains:
+
+- `id`: WordPress post ID.
+- `title`: Project title.
+- `description`: Project description.
+- `category`: Project category information.
+- `image_url`: Project image URL, or `null` if unavailable.
+- `project_url`: Project URL.
+
+The pagination information contains:
+
+- `current_page`
+- `per_page`
+- `total_items`
+- `total_pages`
+
+### Validation and Errors
+
+The controller validates the `page` and `per_page` parameters.
+
+- Invalid `page` values return an `invalid_page` error with HTTP status `400`.
+- Invalid `per_page` values return an `invalid_per_page` error with HTTP status `400`.
+
+The endpoint is publicly readable and does not require authentication according to its public permission callback.
 
 ## Development
 
@@ -198,22 +283,42 @@ When modifying the plugin:
 3. Keep admin settings in `src/Admin/`.
 4. Keep REST API logic in `src/Rest/`.
 5. Keep shortcode logic in `src/Shortcodes/`.
-6. Keep initialization and component registration in `src/Plugin.php`.
-7. Update the REST API documentation when endpoint behavior changes.
+6. Keep project-view functionality in `src/Database/`.
+7. Keep component initialization in `src/class-plugin.php`.
+8. Update this README when public functionality or API behavior changes.
+9. Review Git changes before staging and committing.
 
-### React Frontend Removal
+## Composer and PHPUnit
 
-The React frontend has been removed from this plugin version.
+The combined repository contains the Composer configuration and PHPUnit setup.
 
-The following files are no longer included:
+Run the following commands from the **combined repository root** (`technovz-combined`).
 
-- `assets/css/react-projects.css`
-- `assets/js/react-projects.js`
-- `src/Frontend/ReactProjects.php`
+### Install Dependencies
 
-The plugin bootstrap should not import or initialize the removed `ReactProjects` class.
+```powershell
+& "D:\xampp\php\php.exe" ".\composer.phar" install
+```
 
-Other plugin functionality should be maintained independently of the removed frontend.
+### Run Settings Tests
+
+```powershell
+& "D:\xampp\php\php.exe" ".\vendor\bin\phpunit" ".\wp-content\plugins\project-management-toolkit\tests\SettingsTest.php"
+```
+
+### Run Project-View Tests
+
+```powershell
+& "D:\xampp\php\php.exe" ".\vendor\bin\phpunit" ".\wp-content\plugins\project-management-toolkit\tests\ProjectViewsTest.php"
+```
+
+### Run the Full Test Suite
+
+```powershell
+& "D:\xampp\php\php.exe" ".\vendor\bin\phpunit"
+```
+
+The project-view tests verify selected query-building and view-count behavior using a test database mock. They do not constitute a full integration test against a live WordPress database.
 
 ## Testing Checklist
 
@@ -223,18 +328,31 @@ After installing or updating the plugin, verify the following:
 - [ ] Projects can be created and managed in WordPress.
 - [ ] Project categories and technologies register correctly.
 - [ ] Project custom fields behave as expected.
-- [ ] Admin settings load and save correctly.
-- [ ] REST API routes behave according to the documentation.
-- [ ] The shortcode behaves according to its implementation.
-- [ ] No references to the removed React frontend remain in PHP code.
-- [ ] The WordPress debug log contains no new plugin-related errors.
+- [ ] Admin settings work correctly.
+- [ ] The `[pmt_project]` shortcode displays projects.
+- [ ] The REST API returns project data and pagination details.
+- [ ] Invalid REST API parameters return the expected errors.
+- [ ] PHPUnit tests pass.
+- [ ] No new plugin-related errors appear in the WordPress debug log.
 
 ## Troubleshooting
 
-### Plugin activation fails
+### Plugin Activation Fails
 
-Check the PHP error log and confirm that the plugin files are present in the expected directory.
+Confirm that the plugin files exist in the expected directory. Check the PHP error log and WordPress debug log for errors.
 
-### Projects are not appearing
+### Projects Are Not Appearing
 
-Verify that the custom post type
+Verify that published projects exist and that the project custom post type is registered correctly.
+
+### The Shortcode Displays No Projects
+
+Confirm that published projects are available. If using the `id` attribute, check that the ID belongs to a published project.
+
+### The REST API Returns an Error
+
+Verify the endpoint URL and query parameters. Ensure that `page` is at least `1` and `per_page` is between `1` and `50`.
+
+### PHPUnit Cannot Run
+
+Run Composer installation from the combined repository root. Confirm that `vendor/autoload.php` and the PHPUnit executable exist.

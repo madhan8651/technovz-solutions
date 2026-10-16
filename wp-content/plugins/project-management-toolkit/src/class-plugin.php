@@ -3,7 +3,7 @@
 namespace TechNovz\PMT;
 
 if ( ! defined( 'ABSPATH' ) ) {
-    exit;
+	exit;
 }
 use TechNovz\PMT\Admin\Settings;
 use TechNovz\PMT\Shortcodes\ProjectShortcode;
@@ -16,17 +16,17 @@ use TechNovz\PMT\Database\ProjectViews;
 
 class Plugin {
 
-    public function init() {
+	public function init() {
 
-        if ( is_admin() ) {
-            ( new Settings() )->init();
-        }
-        ( new ProjectPostType() )->init();
-        ( new ProjectShortcode() )->init();
-        ( new ProjectRestController() )->init();
-        ( new ProjectCategory() )->init();
-        ( new ProjectTechnology() )->init();
-        ( new ProjectFields() )->init();
-        ( new ProjectViews() )->init();
-    }
+		if ( is_admin() ) {
+			( new Settings() )->init();
+		}
+		( new ProjectPostType() )->init();
+		( new ProjectShortcode() )->init();
+		( new ProjectRestController() )->init();
+		( new ProjectCategory() )->init();
+		( new ProjectTechnology() )->init();
+		( new ProjectFields() )->init();
+		( new ProjectViews() )->init();
+	}
 }
