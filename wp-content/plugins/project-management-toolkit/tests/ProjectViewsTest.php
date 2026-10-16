@@ -13,7 +13,7 @@ if ( ! function_exists( 'absint' ) ) {
         return abs( (int) $value );
     }
 }
-require_once __DIR__ . '/../src/Database/class-projectviews.php';
+require_once __DIR__ . '/../src/Database/ProjectViews.php';
 
 class ProjectViewsTest extends TestCase {
 
@@ -38,7 +38,7 @@ class ProjectViewsTest extends TestCase {
         $project_views = new ProjectViews();
 
         $this->assertSame( 7, $project_views->get_view_count( 42 ) );
-        $this->assertSame( 'SELECT COUNT(*) FROM `wp_pmt_project_views` WHERE project_id = 42', $wpdb->last_query );
+        $this->assertSame( 'SELECT COUNT(*) FROM wp_pmt_project_views WHERE project_id = 42', $wpdb->last_query );
     }
 }
 
@@ -49,11 +49,16 @@ class ProjectViewsTestDatabase {
     public $last_query = '';
 
     public function prepare( $query, ...$arguments ) {
-        $this->last_query = str_replace(
-            array( '%i', '%d' ),
-            array( '`' . $arguments[0] . '`', (string) $arguments[1] ),
-            $query
-        );
+        foreach ( $arguments as $argument ) {
+            $query = preg_replace(
+                '/%d/',
+                (string) (int) $argument,
+                $query,
+                1
+            );
+        }
+
+        $this->last_query = trim( preg_replace( '/\s+/', ' ', $query ) );
 
         return $this->last_query;
     }
@@ -62,4 +67,3 @@ class ProjectViewsTestDatabase {
         return $this->expected_count;
     }
 }
-
